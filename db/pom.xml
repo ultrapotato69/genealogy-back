@@ -13,5 +13,70 @@
     <artifactId>genealogy-back-db</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
+    <properties>
+        <liquibase.host>localhost</liquibase.host>
+        <liquibase.port>5432</liquibase.port>
+        <liquibase.db>genealogy</liquibase.db>
+        <liquibase.schema>public</liquibase.schema>
+        <liquibase.user>genealogy</liquibase.user>
+        <liquibase.password>genealogy</liquibase.password>
+        <liquibase.version>4.25.1</liquibase.version>
+        <liquibase.propertyFile>liquibase/liquibase-dev.properties</liquibase.propertyFile>
+        <liquibase.changeLogFile>db/changelog/db.changelog-master.xml</liquibase.changeLogFile>
+
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>${liquibase.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <!-- mvn liquibase:update -Denv=dev -Dliquibase.url="jdbc:postgresql://localhost:5432/genealogy" -->
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>${liquibase.version}</version>
+
+                <configuration>
+                    <outputFileEncoding>UTF-8</outputFileEncoding>
+                    <propertyFile>${liquibase.propertyFile}</propertyFile>
+                    <changeLogFile>${liquibase.changeLogFile}</changeLogFile>
+                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <profiles>
+        <!-- Development settings, -Denv=dev -->
+        <profile>
+            <id>dev</id>
+            <activation>
+                <property>
+                    <name>env</name>
+                    <value>dev</value>
+                </property>
+            </activation>
+
+            <properties>
+                <profile.propertyFile>src/main/resources/liquibase/liquibase-dev.properties</profile.propertyFile>
+                <profile.changeLogFile>src/main/resources/db/changelog/db.changelog-master.xml</profile.changeLogFile>
+                <profile.logging>debug</profile.logging>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
