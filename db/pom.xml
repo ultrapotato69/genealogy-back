@@ -20,7 +20,7 @@
         <liquibase.schema>public</liquibase.schema>
         <liquibase.user>genealogy</liquibase.user>
         <liquibase.password>genealogy</liquibase.password>
-        <liquibase.version>4.25.1</liquibase.version>
+        <liquibase.version>4.24.0</liquibase.version>
         <liquibase.propertyFile>liquibase/liquibase-dev.properties</liquibase.propertyFile>
         <liquibase.changeLogFile>db/changelog/db.changelog-master.xml</liquibase.changeLogFile>
 
