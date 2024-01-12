@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration xmlns="http://www.jooq.org/xsd/jooq-codegen-3.19.0.xsd">
+    <jdbc>  <!-- указываем настройки базы -->
+        <driver>org.postgresql.Driver</driver>
+        <url>jdbc:postgresql://localhost:5432/genealogy</url>
+        <username>genealogy</username>
+        <password>genealogy</password>
+    </jdbc>
+    <generator>
+        <database>
+            <includes>.*</includes>  <!-- включаемые подпакеты и файлы -->
+            <excludes>  <!-- исключаемые подпакеты и файлы -->
+                databasechangelog
+                | databasechangeloglock
+            </excludes>
+            <!--							<inputCatalog>pg_catalog</inputCatalog>-->
+            <inputSchema>public</inputSchema>  <!-- схема -->
+        </database>
+        <generate>
+            <records>true</records>
+        </generate>
+        <target>
+            <!-- структура пакетов относительно основной директории -->
+            <packageName>com.example.genealogyback.domain.jooq</packageName>
+            <!-- основная директория. Лучше хранить в target. -->
+            <directory>src/main/java</directory>
+        </target>
+    </generator>
+</configuration>
