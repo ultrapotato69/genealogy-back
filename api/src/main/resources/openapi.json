@@ -1,0 +1,400 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Сервис по генеалогии - OpenAPI спецификация",
+    "description": "Сервис позволяет зарегистрированному пользователю создавать генеалогическое древо",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8686/genealogy/swagger-ui/index.html",
+      "description": "Dev Server"
+    }
+  ],
+  "paths": {
+    "/persons": {
+      "get": {
+        "summary": "Метод получения списка родственников в дереве",
+        "tags": [
+          "Persons"
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ со списком родственников",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Persons"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Метод добавления нового родственника в древо",
+        "description": "Метод предназначен для сохранения в БД данных по новому родственнику",
+        "tags": [
+          "Person"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json;charset=UTF-8": {
+              "schema": {
+                "$ref": "#/components/schemas/Person"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Подтверждение успешного сохранения",
+            "content": {
+              "application/json;charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Person"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные входные данные. Возвращает список атрибутов с ошибками",
+            "content": {
+              "application/json;charset=UTF-8": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/persons/{person_id}": {
+      "get": {
+        "summary": "Метод получения карточки по идентификатору",
+        "description": "Метод предназначен для получения из БД данных по одному родственнику.",
+        "tags": [
+          "Person"
+        ],
+        "parameters": [
+          {
+            "name": "person_id",
+            "required": true,
+            "in": "path",
+            "description": "Идентификатор карточки с данными родственника",
+            "example": "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Карточка родственника",
+            "content": {
+              "application/json;charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Person"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Метод обновления карточки родственника",
+        "description": "Метод предназначен для обновления в БД данных по имеющейся карточке родственника",
+        "tags": [
+          "Person"
+        ],
+        "parameters": [
+          {
+            "name": "person_id",
+            "required": true,
+            "in": "path",
+            "description": "Идентификатор карточки с данными родственника",
+            "example": "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json;charset=UTF-8": {
+              "schema": {
+                "$ref": "#/components/schemas/Person"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Подтверждение успешного обновления",
+            "content": {
+              "application/json;charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/Person"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Некорректные входные данные. Возвращает список атрибутов с ошибками",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Любая неожиданная ошибка сервера",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Метод удаления карточки родственника и его предков по идентификатору",
+        "description": "Метод предназначен для удаления в БД данных по карточке родственника.",
+        "tags": [
+          "Person"
+        ],
+        "parameters": [
+          {
+            "name": "person_id",
+            "required": true,
+            "in": "path",
+            "description": "Идентификатор карточки родственника",
+            "example": "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешное удаление",
+            "content": {}
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Persons": {
+        "type": "object",
+        "required": [
+          "firstName",
+          "surname",
+          "maidenName",
+          "gender",
+          "birthDate",
+          "dearthDate",
+          "bio",
+          "spouse",
+          "avatar",
+          "parents"
+        ],
+        "properties": {
+          "person_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+            "description": "Идентификатор карточки родственника"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "Ivan"
+          },
+          "surname": {
+            "type": "string",
+            "example": "Petrov"
+          },
+          "maidenName": {
+            "type": "string",
+            "example": "Smirnova"
+          },
+          "gender": {
+            "type": "string",
+            "example": "male",
+            "enum": [
+              "male",
+              "female"
+            ]
+          },
+          "birthDate": {
+            "type": "string",
+            "example": "05.03.1917"
+          },
+          "dearthDate": {
+            "type": "string",
+            "example": "05.03.1917"
+          },
+          "bio": {
+            "type": "string",
+            "example": "Биография моего предка очень интересна"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png"
+          },
+          "spouse_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+            "description": "Идентификатор супруга/супруги"
+          },
+          "parents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Person"
+            }
+          }
+        }
+      },
+      "Person": {
+        "type": "object",
+        "required": [
+          "firstName",
+          "surname",
+          "maidenName",
+          "gender",
+          "birthDate",
+          "dearthDate",
+          "bio",
+          "spouse_id",
+          "avatar"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "Ivan"
+          },
+          "surname": {
+            "type": "string",
+            "example": "Petrov"
+          },
+          "maidenName": {
+            "type": "string",
+            "example": "Smirnova"
+          },
+          "gender": {
+            "type": "string",
+            "example": "male",
+            "enum": [
+              "male",
+              "female"
+            ]
+          },
+          "birthDate": {
+            "type": "string",
+            "example": "05.03.1917"
+          },
+          "dearthDate": {
+            "type": "string",
+            "example": "05.03.1917"
+          },
+          "bio": {
+            "type": "string",
+            "example": "Биография моего предка очень интересна"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png"
+          },
+          "spouse_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "42abcd2b-8b9c-4af9-88f7-0bc180cf74b8",
+            "description": "Идентификатор супруга/супруги"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "title",
+          "detail",
+          "request",
+          "time",
+          "errorTraceId"
+        ],
+        "properties": {
+          "title": {
+            "description": "Краткое описание проблемы, понятное человеку",
+            "type": "string",
+            "example": "Entity not found"
+          },
+          "detail": {
+            "description": "Описание конкретно возникшей ошибки, понятное человеку",
+            "type": "string",
+            "example": "Entity [Post] with id = [123456] not found. You MUST use POST to add entity instead of PUT"
+          },
+          "request": {
+            "description": "Метод и URL запроса",
+            "type": "string",
+            "example": "PUT /posts/123456"
+          },
+          "time": {
+            "description": "Время возникновения ошибки с точностью до миллисекунд",
+            "type": "string",
+            "example": "1996-12-20T00:39:57.870Z"
+          },
+          "errorTraceId": {
+            "description": "Идентификатор конкретного возникновения ошибки",
+            "type": "string",
+            "example": "ce1ff211-b5dd-4397-b8a8-3f640705efa2"
+          },
+          "errorCode": {
+            "description": "Код ошибки по бизнес логике приложения",
+            "type": "integer",
+            "format": "int32",
+            "example": 57
+          },
+          "exception": {
+            "description": "Тип ошибки",
+            "type": "string",
+            "example": "NullPointerException"
+          },
+          "stacktrace": {
+            "description": "Stacktrace в случае возникновения на сервере исключения",
+            "type": "string",
+            "example": "..."
+          },
+          "causeException": {
+            "description": "Тип первоначального исключения",
+            "type": "string",
+            "example": "..."
+          },
+          "causeStacketrace": {
+            "description": "Stacktrace первоначального исключения",
+            "type": "string",
+            "example": "..."
+          }
+        }
+      }
+    }
+  }
+}
