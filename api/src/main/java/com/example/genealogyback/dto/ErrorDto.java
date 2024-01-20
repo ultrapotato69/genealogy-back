@@ -4,10 +4,11 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
@@ -15,11 +16,12 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * Error
+ * ErrorDto
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-18T15:20:34.794267600+03:00[Europe/Moscow]")
-public class Error {
+@JsonTypeName("Error")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-20T11:31:35.011117+03:00[Europe/Moscow]")
+public class ErrorDto {
 
   private String title;
 
@@ -41,14 +43,14 @@ public class Error {
 
   private String causeStacketrace;
 
-  public Error() {
+  public ErrorDto() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public Error(String title, String detail, String request, String time, String errorTraceId) {
+  public ErrorDto(String title, String detail, String request, String time, String errorTraceId) {
     this.title = title;
     this.detail = detail;
     this.request = request;
@@ -56,7 +58,7 @@ public class Error {
     this.errorTraceId = errorTraceId;
   }
 
-  public Error title(String title) {
+  public ErrorDto title(String title) {
     this.title = title;
     return this;
   }
@@ -76,7 +78,7 @@ public class Error {
     this.title = title;
   }
 
-  public Error detail(String detail) {
+  public ErrorDto detail(String detail) {
     this.detail = detail;
     return this;
   }
@@ -96,7 +98,7 @@ public class Error {
     this.detail = detail;
   }
 
-  public Error request(String request) {
+  public ErrorDto request(String request) {
     this.request = request;
     return this;
   }
@@ -116,7 +118,7 @@ public class Error {
     this.request = request;
   }
 
-  public Error time(String time) {
+  public ErrorDto time(String time) {
     this.time = time;
     return this;
   }
@@ -136,7 +138,7 @@ public class Error {
     this.time = time;
   }
 
-  public Error errorTraceId(String errorTraceId) {
+  public ErrorDto errorTraceId(String errorTraceId) {
     this.errorTraceId = errorTraceId;
     return this;
   }
@@ -156,7 +158,7 @@ public class Error {
     this.errorTraceId = errorTraceId;
   }
 
-  public Error errorCode(Integer errorCode) {
+  public ErrorDto errorCode(Integer errorCode) {
     this.errorCode = errorCode;
     return this;
   }
@@ -176,7 +178,7 @@ public class Error {
     this.errorCode = errorCode;
   }
 
-  public Error exception(String exception) {
+  public ErrorDto exception(String exception) {
     this.exception = exception;
     return this;
   }
@@ -196,7 +198,7 @@ public class Error {
     this.exception = exception;
   }
 
-  public Error stacktrace(String stacktrace) {
+  public ErrorDto stacktrace(String stacktrace) {
     this.stacktrace = stacktrace;
     return this;
   }
@@ -216,7 +218,7 @@ public class Error {
     this.stacktrace = stacktrace;
   }
 
-  public Error causeException(String causeException) {
+  public ErrorDto causeException(String causeException) {
     this.causeException = causeException;
     return this;
   }
@@ -236,7 +238,7 @@ public class Error {
     this.causeException = causeException;
   }
 
-  public Error causeStacketrace(String causeStacketrace) {
+  public ErrorDto causeStacketrace(String causeStacketrace) {
     this.causeStacketrace = causeStacketrace;
     return this;
   }
@@ -264,7 +266,7 @@ public class Error {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Error error = (Error) o;
+    ErrorDto error = (ErrorDto) o;
     return Objects.equals(this.title, error.title) &&
         Objects.equals(this.detail, error.detail) &&
         Objects.equals(this.request, error.request) &&
@@ -285,7 +287,7 @@ public class Error {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Error {\n");
+    sb.append("class ErrorDto {\n");
     sb.append("    title: ").append(toIndentedString(title)).append("\n");
     sb.append("    detail: ").append(toIndentedString(detail)).append("\n");
     sb.append("    request: ").append(toIndentedString(request)).append("\n");
