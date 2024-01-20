@@ -59,21 +59,29 @@
                             <inputSpec>${project.basedir}/src/main/resources/openapi.json</inputSpec>
                             <output>./</output>
                             <generatorName>spring</generatorName>
-                            <output>./</output>
                             <generateApiDocumentation>false</generateApiDocumentation>
                             <generateApiTests>false</generateApiTests>
                             <generateModelDocumentation>false</generateModelDocumentation>
                             <generateModelTests>false</generateModelTests>
+                            <modelNameSuffix>Dto</modelNameSuffix>
+                            <generateModels>true</generateModels>
                             <generateApiTests>false</generateApiTests>
                             <generateSupportingFiles>false</generateSupportingFiles>
                             <modelPackage>com.example.genealogyback.dto</modelPackage>
                             <apiPackage>com.example.genealogyback.controller</apiPackage>
                             <configOptions>
+                                <useTags>true</useTags>
                                 <interfaceOnly>true</interfaceOnly>
                                 <useJakartaEe>true</useJakartaEe>
                                 <sourceFolder>src/main/java</sourceFolder>
                                 <useSpringBoot3>true</useSpringBoot3>
-
+                                <openApiNullable>false</openApiNullable>
+                                <!-- override the default library to jersey2 -->
+                                <serializationLibrary>jackson</serializationLibrary>
+                                <!-- switch documentation provider to springdoc -->
+                                <documentationProvider>springdoc</documentationProvider>
+                                <!-- Activating Java 8 features -->
+                                <performBeanValidation>true</performBeanValidation>
                             </configOptions>
                         </configuration>
                     </execution>
