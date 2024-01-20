@@ -5,10 +5,7 @@
  */
 package com.example.genealogyback.controller;
 
-import com.example.genealogyback.dto.Error;
-import com.example.genealogyback.dto.Person;
-import com.example.genealogyback.dto.Persons;
-import java.util.UUID;
+import com.example.genealogyback.dto.PersonsDto;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -35,7 +32,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-18T15:20:34.794267600+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-20T11:31:35.011117+03:00[Europe/Moscow]")
 @Validated
 @Tag(name = "Persons", description = "the Persons API")
 public interface PersonsApi {
@@ -55,7 +52,7 @@ public interface PersonsApi {
         tags = { "Persons" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Успешный ответ со списком родственников", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Persons.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = PersonsDto.class))
             })
         }
     )
@@ -65,7 +62,7 @@ public interface PersonsApi {
         produces = { "application/json" }
     )
     
-    default ResponseEntity<Persons> personsGet(
+    default ResponseEntity<PersonsDto> personsGet(
         
     ) {
         getRequest().ifPresent(request -> {
@@ -73,182 +70,6 @@ public interface PersonsApi {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
                     String exampleString = "{ \"dearthDate\" : \"05.03.1917\", \"firstName\" : \"Ivan\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"surname\" : \"Petrov\", \"maidenName\" : \"Smirnova\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"birthDate\" : \"05.03.1917\", \"person_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"parents\" : [ { \"dearthDate\" : \"05.03.1917\", \"firstName\" : \"Ivan\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b8\", \"surname\" : \"Petrov\", \"maidenName\" : \"Smirnova\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"birthDate\" : \"05.03.1917\" }, { \"dearthDate\" : \"05.03.1917\", \"firstName\" : \"Ivan\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b8\", \"surname\" : \"Petrov\", \"maidenName\" : \"Smirnova\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"birthDate\" : \"05.03.1917\" } ] }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    /**
-     * DELETE /persons/{person_id} : Метод удаления карточки родственника и его предков по идентификатору
-     * Метод предназначен для удаления в БД данных по карточке родственника.
-     *
-     * @param personId Идентификатор карточки родственника (required)
-     * @return Успешное удаление (status code 200)
-     */
-    @Operation(
-        operationId = "personsPersonIdDelete",
-        summary = "Метод удаления карточки родственника и его предков по идентификатору",
-        description = "Метод предназначен для удаления в БД данных по карточке родственника.",
-        tags = { "Person" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Успешное удаление")
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.DELETE,
-        value = "/persons/{person_id}"
-    )
-    
-    default ResponseEntity<Void> personsPersonIdDelete(
-        @Parameter(name = "person_id", description = "Идентификатор карточки родственника", required = true, in = ParameterIn.PATH) @PathVariable("person_id") UUID personId
-    ) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    /**
-     * GET /persons/{person_id} : Метод получения карточки по идентификатору
-     * Метод предназначен для получения из БД данных по одному родственнику.
-     *
-     * @param personId Идентификатор карточки с данными родственника (required)
-     * @return Карточка родственника (status code 200)
-     */
-    @Operation(
-        operationId = "personsPersonIdGet",
-        summary = "Метод получения карточки по идентификатору",
-        description = "Метод предназначен для получения из БД данных по одному родственнику.",
-        tags = { "Person" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Карточка родственника", content = {
-                @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = Person.class))
-            })
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/persons/{person_id}",
-        produces = { "application/json;charset=UTF-8" }
-    )
-
-    default ResponseEntity<Person> personsPersonIdGet(
-        @Parameter(name = "person_id", description = "Идентификатор карточки с данными родственника", required = true, in = ParameterIn.PATH) @PathVariable("person_id") UUID personId
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json;charset=UTF-8"))) {
-                    String exampleString = "{ \"dearthDate\" : \"05.03.1917\", \"firstName\" : \"Ivan\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b8\", \"surname\" : \"Petrov\", \"maidenName\" : \"Smirnova\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"birthDate\" : \"05.03.1917\" }";
-                    ApiUtil.setExampleResponse(request, "application/json;charset=UTF-8", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    /**
-     * PUT /persons/{person_id} : Метод обновления карточки родственника
-     * Метод предназначен для обновления в БД данных по имеющейся карточке родственника
-     *
-     * @param personId Идентификатор карточки с данными родственника (required)
-     * @param person  (required)
-     * @return Подтверждение успешного обновления (status code 200)
-     *         or Некорректные входные данные. Возвращает список атрибутов с ошибками (status code 400)
-     *         or Любая неожиданная ошибка сервера (status code 5XX)
-     */
-    @Operation(
-        operationId = "personsPersonIdPut",
-        summary = "Метод обновления карточки родственника",
-        description = "Метод предназначен для обновления в БД данных по имеющейся карточке родственника",
-        tags = { "Person" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Подтверждение успешного обновления", content = {
-                @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = Person.class)),
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Person.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Некорректные входные данные. Возвращает список атрибутов с ошибками", content = {
-                @Content(mediaType = "application/json;charset=UTF-8", array = @ArraySchema(schema = @Schema(implementation = String.class))),
-                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = String.class)))
-            }),
-            @ApiResponse(responseCode = "5XX", description = "Любая неожиданная ошибка сервера", content = {
-                @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = Error.class)),
-                @Content(mediaType = "application/json", schema = @Schema(implementation = Error.class))
-            })
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.PUT,
-        value = "/persons/{person_id}",
-        produces = { "application/json;charset=UTF-8", "application/json" },
-        consumes = { "application/json;charset=UTF-8" }
-    )
-    
-    default ResponseEntity<Person> personsPersonIdPut(
-        @Parameter(name = "person_id", description = "Идентификатор карточки с данными родственника", required = true, in = ParameterIn.PATH) @PathVariable("person_id") UUID personId,
-        @Parameter(name = "Person", description = "", required = true) @Valid @RequestBody Person person
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"dearthDate\" : \"05.03.1917\", \"firstName\" : \"Ivan\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b8\", \"surname\" : \"Petrov\", \"maidenName\" : \"Smirnova\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"birthDate\" : \"05.03.1917\" }";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json;charset=UTF-8"))) {
-                    String exampleString = "{ \"dearthDate\" : \"05.03.1917\", \"firstName\" : \"Ivan\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b8\", \"surname\" : \"Petrov\", \"maidenName\" : \"Smirnova\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"birthDate\" : \"05.03.1917\" }";
-                    ApiUtil.setExampleResponse(request, "application/json;charset=UTF-8", exampleString);
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
-    }
-
-
-    /**
-     * POST /persons : Метод добавления нового родственника в древо
-     * Метод предназначен для сохранения в БД данных по новому родственнику
-     *
-     * @param person  (required)
-     * @return Подтверждение успешного сохранения (status code 200)
-     *         or Некорректные входные данные. Возвращает список атрибутов с ошибками (status code 400)
-     */
-    @Operation(
-        operationId = "personsPost",
-        summary = "Метод добавления нового родственника в древо",
-        description = "Метод предназначен для сохранения в БД данных по новому родственнику",
-        tags = { "Person" },
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Подтверждение успешного сохранения", content = {
-                @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = Person.class))
-            }),
-            @ApiResponse(responseCode = "400", description = "Некорректные входные данные. Возвращает список атрибутов с ошибками", content = {
-                @Content(mediaType = "application/json;charset=UTF-8", array = @ArraySchema(schema = @Schema(implementation = String.class)))
-            })
-        }
-    )
-    @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/persons",
-        produces = { "application/json;charset=UTF-8" },
-        consumes = { "application/json;charset=UTF-8" }
-    )
-    
-    default ResponseEntity<Person> personsPost(
-        @Parameter(name = "Person", description = "", required = true) @Valid @RequestBody Person person
-    ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json;charset=UTF-8"))) {
-                    String exampleString = "{ \"dearthDate\" : \"05.03.1917\", \"firstName\" : \"Ivan\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b8\", \"surname\" : \"Petrov\", \"maidenName\" : \"Smirnova\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"birthDate\" : \"05.03.1917\" }";
-                    ApiUtil.setExampleResponse(request, "application/json;charset=UTF-8", exampleString);
                     break;
                 }
             }

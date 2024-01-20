@@ -4,12 +4,13 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.UUID;
-import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
@@ -17,11 +18,12 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * Person
+ * PersonDto
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-18T15:20:34.794267600+03:00[Europe/Moscow]")
-public class Person {
+@JsonTypeName("Person")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-20T11:31:35.011117+03:00[Europe/Moscow]")
+public class PersonDto {
 
   private String firstName;
 
@@ -76,14 +78,14 @@ public class Person {
 
   private UUID spouseId;
 
-  public Person() {
+  public PersonDto() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public Person(String firstName, String surname, String maidenName, GenderEnum gender, String birthDate, String dearthDate, String bio, String avatar, UUID spouseId) {
+  public PersonDto(String firstName, String surname, String maidenName, GenderEnum gender, String birthDate, String dearthDate, String bio, String avatar, UUID spouseId) {
     this.firstName = firstName;
     this.surname = surname;
     this.maidenName = maidenName;
@@ -95,7 +97,7 @@ public class Person {
     this.spouseId = spouseId;
   }
 
-  public Person firstName(String firstName) {
+  public PersonDto firstName(String firstName) {
     this.firstName = firstName;
     return this;
   }
@@ -115,7 +117,7 @@ public class Person {
     this.firstName = firstName;
   }
 
-  public Person surname(String surname) {
+  public PersonDto surname(String surname) {
     this.surname = surname;
     return this;
   }
@@ -135,7 +137,7 @@ public class Person {
     this.surname = surname;
   }
 
-  public Person maidenName(String maidenName) {
+  public PersonDto maidenName(String maidenName) {
     this.maidenName = maidenName;
     return this;
   }
@@ -155,7 +157,7 @@ public class Person {
     this.maidenName = maidenName;
   }
 
-  public Person gender(GenderEnum gender) {
+  public PersonDto gender(GenderEnum gender) {
     this.gender = gender;
     return this;
   }
@@ -175,7 +177,7 @@ public class Person {
     this.gender = gender;
   }
 
-  public Person birthDate(String birthDate) {
+  public PersonDto birthDate(String birthDate) {
     this.birthDate = birthDate;
     return this;
   }
@@ -195,7 +197,7 @@ public class Person {
     this.birthDate = birthDate;
   }
 
-  public Person dearthDate(String dearthDate) {
+  public PersonDto dearthDate(String dearthDate) {
     this.dearthDate = dearthDate;
     return this;
   }
@@ -215,7 +217,7 @@ public class Person {
     this.dearthDate = dearthDate;
   }
 
-  public Person bio(String bio) {
+  public PersonDto bio(String bio) {
     this.bio = bio;
     return this;
   }
@@ -235,7 +237,7 @@ public class Person {
     this.bio = bio;
   }
 
-  public Person avatar(String avatar) {
+  public PersonDto avatar(String avatar) {
     this.avatar = avatar;
     return this;
   }
@@ -255,7 +257,7 @@ public class Person {
     this.avatar = avatar;
   }
 
-  public Person spouseId(UUID spouseId) {
+  public PersonDto spouseId(UUID spouseId) {
     this.spouseId = spouseId;
     return this;
   }
@@ -283,7 +285,7 @@ public class Person {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Person person = (Person) o;
+    PersonDto person = (PersonDto) o;
     return Objects.equals(this.firstName, person.firstName) &&
         Objects.equals(this.surname, person.surname) &&
         Objects.equals(this.maidenName, person.maidenName) &&
@@ -303,7 +305,7 @@ public class Person {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Person {\n");
+    sb.append("class PersonDto {\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    surname: ").append(toIndentedString(surname)).append("\n");
     sb.append("    maidenName: ").append(toIndentedString(maidenName)).append("\n");

@@ -2,18 +2,19 @@ package com.example.genealogyback.dto;
 
 import java.net.URI;
 import java.util.Objects;
-import com.example.genealogyback.dto.Person;
+import com.example.genealogyback.dto.PersonDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.*;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
@@ -21,11 +22,12 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * Persons
+ * PersonsDto
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-18T15:20:34.794267600+03:00[Europe/Moscow]")
-public class Persons {
+@JsonTypeName("Persons")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-20T11:31:35.011117+03:00[Europe/Moscow]")
+public class PersonsDto {
 
   private UUID personId;
 
@@ -83,16 +85,16 @@ public class Persons {
   private UUID spouseId;
 
   @Valid
-  private List<@Valid Person> parents = new ArrayList<>();
+  private List<@Valid PersonDto> parents = new ArrayList<>();
 
-  public Persons() {
+  public PersonsDto() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public Persons(String firstName, String surname, String maidenName, GenderEnum gender, String birthDate, String dearthDate, String bio, String avatar, List<@Valid Person> parents) {
+  public PersonsDto(String firstName, String surname, String maidenName, GenderEnum gender, String birthDate, String dearthDate, String bio, String avatar, List<@Valid PersonDto> parents) {
     this.firstName = firstName;
     this.surname = surname;
     this.maidenName = maidenName;
@@ -104,7 +106,7 @@ public class Persons {
     this.parents = parents;
   }
 
-  public Persons personId(UUID personId) {
+  public PersonsDto personId(UUID personId) {
     this.personId = personId;
     return this;
   }
@@ -124,7 +126,7 @@ public class Persons {
     this.personId = personId;
   }
 
-  public Persons firstName(String firstName) {
+  public PersonsDto firstName(String firstName) {
     this.firstName = firstName;
     return this;
   }
@@ -144,7 +146,7 @@ public class Persons {
     this.firstName = firstName;
   }
 
-  public Persons surname(String surname) {
+  public PersonsDto surname(String surname) {
     this.surname = surname;
     return this;
   }
@@ -164,7 +166,7 @@ public class Persons {
     this.surname = surname;
   }
 
-  public Persons maidenName(String maidenName) {
+  public PersonsDto maidenName(String maidenName) {
     this.maidenName = maidenName;
     return this;
   }
@@ -184,7 +186,7 @@ public class Persons {
     this.maidenName = maidenName;
   }
 
-  public Persons gender(GenderEnum gender) {
+  public PersonsDto gender(GenderEnum gender) {
     this.gender = gender;
     return this;
   }
@@ -204,7 +206,7 @@ public class Persons {
     this.gender = gender;
   }
 
-  public Persons birthDate(String birthDate) {
+  public PersonsDto birthDate(String birthDate) {
     this.birthDate = birthDate;
     return this;
   }
@@ -224,7 +226,7 @@ public class Persons {
     this.birthDate = birthDate;
   }
 
-  public Persons dearthDate(String dearthDate) {
+  public PersonsDto dearthDate(String dearthDate) {
     this.dearthDate = dearthDate;
     return this;
   }
@@ -244,7 +246,7 @@ public class Persons {
     this.dearthDate = dearthDate;
   }
 
-  public Persons bio(String bio) {
+  public PersonsDto bio(String bio) {
     this.bio = bio;
     return this;
   }
@@ -264,7 +266,7 @@ public class Persons {
     this.bio = bio;
   }
 
-  public Persons avatar(String avatar) {
+  public PersonsDto avatar(String avatar) {
     this.avatar = avatar;
     return this;
   }
@@ -284,7 +286,7 @@ public class Persons {
     this.avatar = avatar;
   }
 
-  public Persons spouseId(UUID spouseId) {
+  public PersonsDto spouseId(UUID spouseId) {
     this.spouseId = spouseId;
     return this;
   }
@@ -304,12 +306,12 @@ public class Persons {
     this.spouseId = spouseId;
   }
 
-  public Persons parents(List<@Valid Person> parents) {
+  public PersonsDto parents(List<@Valid PersonDto> parents) {
     this.parents = parents;
     return this;
   }
 
-  public Persons addParentsItem(Person parentsItem) {
+  public PersonsDto addParentsItem(PersonDto parentsItem) {
     if (this.parents == null) {
       this.parents = new ArrayList<>();
     }
@@ -324,11 +326,11 @@ public class Persons {
   @NotNull @Valid 
   @Schema(name = "parents", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("parents")
-  public List<@Valid Person> getParents() {
+  public List<@Valid PersonDto> getParents() {
     return parents;
   }
 
-  public void setParents(List<@Valid Person> parents) {
+  public void setParents(List<@Valid PersonDto> parents) {
     this.parents = parents;
   }
 
@@ -340,7 +342,7 @@ public class Persons {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Persons persons = (Persons) o;
+    PersonsDto persons = (PersonsDto) o;
     return Objects.equals(this.personId, persons.personId) &&
         Objects.equals(this.firstName, persons.firstName) &&
         Objects.equals(this.surname, persons.surname) &&
@@ -362,7 +364,7 @@ public class Persons {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Persons {\n");
+    sb.append("class PersonsDto {\n");
     sb.append("    personId: ").append(toIndentedString(personId)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    surname: ").append(toIndentedString(surname)).append("\n");
