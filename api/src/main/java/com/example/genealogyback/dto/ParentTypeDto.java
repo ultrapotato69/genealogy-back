@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * тип родителя
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-24T12:36:59.203769500+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-24T13:16:45.722079800+03:00[Europe/Moscow]")
 public enum ParentTypeDto {
   
   MOTHER("mother"),
