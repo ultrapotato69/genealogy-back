@@ -4,7 +4,7 @@ info:
   description: Сервис позволяет зарегистрированному пользователю создавать генеалогическое древо
   version: 0.0.1
 servers:
-  - url:  http://localhost:8686/genealogy/swagger-ui/index.html
+  - url:  https://localhost:8686/genealogy/swagger-ui/index.html
     description: Dev Server
 paths:
   /person/{person_id}/:
