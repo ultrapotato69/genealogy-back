@@ -256,7 +256,6 @@ components:
         - firstName
         - surname
         - gender
-        - treeOwner
       properties:
         person_id:
           type: string
@@ -294,30 +293,60 @@ components:
         avatar:
           type: string
           example: https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png
-        treeOwner: 
-          type: boolean
-          example: true
           
     PersonWithAncestors:
-      type: object
-      required:
-        - parents
-      properties:
-        parents:
-          type: array
-          items:
-            example: 
-            - person_id: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b4
-            - firstName: Елена
-            - surname: Петрова
-            - gender: male
-            - spouse_id: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b4
-            - parents: []
-            - maidenName: Смирнова
-            - treeOwner: false
-            - person_id: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b9
       allOf:
-          - $ref: '#/components/schemas/Person'
+        - $ref: '#/components/schemas/Person'
+        - type: object
+          required:
+            - treeOwner
+            - parents
+          properties:
+            treeOwner:
+              type: boolean
+              example: true
+            parents:
+              type: array
+              items:
+                $ref: '#/components/schemas/PersonWithAncestors'
+      example:
+        person_id: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b4
+        firstName: Елена
+        surname: Петрова
+        gender: male
+        spouse_id: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b4
+        maidenName: Смирнова
+        birthDate: '2024-01-23'
+        deathDate: '2024-01-23'
+        bio: Биография моего предка очень интересна
+        avatar: https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png
+        treeOwner: true
+        parents:
+          - person_id: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b4
+            firstName: Елена
+            surname: Петрова
+            gender: female
+            spouse_id: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b4
+            maidenName: Смирнова
+            birthDate: '2024-01-23'
+            deathDate: '2024-01-23'
+            bio: Биография моего предка очень интересна
+            avatar: https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png
+            treeOwner: false
+            parents: []
+          - person_id: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b5
+            firstName: Иван
+            surname: Петров
+            gender: male
+            spouse_id: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b4
+            maidenName: Смирнова
+            birthDate: '2024-01-23'
+            deathDate: '2024-01-23'
+            bio: Биография моего предка очень интересна
+            avatar: https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1537.png
+            treeOwner: false
+            parents: []
+
     
     Parents:
       type: object
