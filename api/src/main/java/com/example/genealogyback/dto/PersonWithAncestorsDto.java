@@ -8,6 +8,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.time.OffsetDateTime;
@@ -21,12 +24,12 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * PersonDto
+ * PersonWithAncestorsDto
  */
 
-@JsonTypeName("Person")
+@JsonTypeName("PersonWithAncestors")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-24T12:36:59.203769500+03:00[Europe/Moscow]")
-public class PersonDto {
+public class PersonWithAncestorsDto {
 
   private UUID personId;
 
@@ -50,20 +53,27 @@ public class PersonDto {
 
   private String avatar;
 
-  public PersonDto() {
+  private Boolean treeOwner;
+
+  @Valid
+  private List<@Valid PersonWithAncestorsDto> parents = new ArrayList<>();
+
+  public PersonWithAncestorsDto() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public PersonDto(String firstName, String surname, GenderDto gender) {
+  public PersonWithAncestorsDto(String firstName, String surname, GenderDto gender, Boolean treeOwner, List<@Valid PersonWithAncestorsDto> parents) {
     this.firstName = firstName;
     this.surname = surname;
     this.gender = gender;
+    this.treeOwner = treeOwner;
+    this.parents = parents;
   }
 
-  public PersonDto personId(UUID personId) {
+  public PersonWithAncestorsDto personId(UUID personId) {
     this.personId = personId;
     return this;
   }
@@ -83,7 +93,7 @@ public class PersonDto {
     this.personId = personId;
   }
 
-  public PersonDto firstName(String firstName) {
+  public PersonWithAncestorsDto firstName(String firstName) {
     this.firstName = firstName;
     return this;
   }
@@ -103,7 +113,7 @@ public class PersonDto {
     this.firstName = firstName;
   }
 
-  public PersonDto surname(String surname) {
+  public PersonWithAncestorsDto surname(String surname) {
     this.surname = surname;
     return this;
   }
@@ -123,7 +133,7 @@ public class PersonDto {
     this.surname = surname;
   }
 
-  public PersonDto gender(GenderDto gender) {
+  public PersonWithAncestorsDto gender(GenderDto gender) {
     this.gender = gender;
     return this;
   }
@@ -143,7 +153,7 @@ public class PersonDto {
     this.gender = gender;
   }
 
-  public PersonDto spouseId(UUID spouseId) {
+  public PersonWithAncestorsDto spouseId(UUID spouseId) {
     this.spouseId = spouseId;
     return this;
   }
@@ -163,7 +173,7 @@ public class PersonDto {
     this.spouseId = spouseId;
   }
 
-  public PersonDto maidenName(String maidenName) {
+  public PersonWithAncestorsDto maidenName(String maidenName) {
     this.maidenName = maidenName;
     return this;
   }
@@ -183,7 +193,7 @@ public class PersonDto {
     this.maidenName = maidenName;
   }
 
-  public PersonDto birthDate(LocalDate birthDate) {
+  public PersonWithAncestorsDto birthDate(LocalDate birthDate) {
     this.birthDate = birthDate;
     return this;
   }
@@ -203,7 +213,7 @@ public class PersonDto {
     this.birthDate = birthDate;
   }
 
-  public PersonDto deathDate(LocalDate deathDate) {
+  public PersonWithAncestorsDto deathDate(LocalDate deathDate) {
     this.deathDate = deathDate;
     return this;
   }
@@ -223,7 +233,7 @@ public class PersonDto {
     this.deathDate = deathDate;
   }
 
-  public PersonDto bio(String bio) {
+  public PersonWithAncestorsDto bio(String bio) {
     this.bio = bio;
     return this;
   }
@@ -243,7 +253,7 @@ public class PersonDto {
     this.bio = bio;
   }
 
-  public PersonDto avatar(String avatar) {
+  public PersonWithAncestorsDto avatar(String avatar) {
     this.avatar = avatar;
     return this;
   }
@@ -263,6 +273,54 @@ public class PersonDto {
     this.avatar = avatar;
   }
 
+  public PersonWithAncestorsDto treeOwner(Boolean treeOwner) {
+    this.treeOwner = treeOwner;
+    return this;
+  }
+
+  /**
+   * Get treeOwner
+   * @return treeOwner
+  */
+  @NotNull 
+  @Schema(name = "treeOwner", example = "true", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("treeOwner")
+  public Boolean getTreeOwner() {
+    return treeOwner;
+  }
+
+  public void setTreeOwner(Boolean treeOwner) {
+    this.treeOwner = treeOwner;
+  }
+
+  public PersonWithAncestorsDto parents(List<@Valid PersonWithAncestorsDto> parents) {
+    this.parents = parents;
+    return this;
+  }
+
+  public PersonWithAncestorsDto addParentsItem(PersonWithAncestorsDto parentsItem) {
+    if (this.parents == null) {
+      this.parents = new ArrayList<>();
+    }
+    this.parents.add(parentsItem);
+    return this;
+  }
+
+  /**
+   * Get parents
+   * @return parents
+  */
+  @NotNull @Valid 
+  @Schema(name = "parents", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("parents")
+  public List<@Valid PersonWithAncestorsDto> getParents() {
+    return parents;
+  }
+
+  public void setParents(List<@Valid PersonWithAncestorsDto> parents) {
+    this.parents = parents;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -271,28 +329,30 @@ public class PersonDto {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PersonDto person = (PersonDto) o;
-    return Objects.equals(this.personId, person.personId) &&
-        Objects.equals(this.firstName, person.firstName) &&
-        Objects.equals(this.surname, person.surname) &&
-        Objects.equals(this.gender, person.gender) &&
-        Objects.equals(this.spouseId, person.spouseId) &&
-        Objects.equals(this.maidenName, person.maidenName) &&
-        Objects.equals(this.birthDate, person.birthDate) &&
-        Objects.equals(this.deathDate, person.deathDate) &&
-        Objects.equals(this.bio, person.bio) &&
-        Objects.equals(this.avatar, person.avatar);
+    PersonWithAncestorsDto personWithAncestors = (PersonWithAncestorsDto) o;
+    return Objects.equals(this.personId, personWithAncestors.personId) &&
+        Objects.equals(this.firstName, personWithAncestors.firstName) &&
+        Objects.equals(this.surname, personWithAncestors.surname) &&
+        Objects.equals(this.gender, personWithAncestors.gender) &&
+        Objects.equals(this.spouseId, personWithAncestors.spouseId) &&
+        Objects.equals(this.maidenName, personWithAncestors.maidenName) &&
+        Objects.equals(this.birthDate, personWithAncestors.birthDate) &&
+        Objects.equals(this.deathDate, personWithAncestors.deathDate) &&
+        Objects.equals(this.bio, personWithAncestors.bio) &&
+        Objects.equals(this.avatar, personWithAncestors.avatar) &&
+        Objects.equals(this.treeOwner, personWithAncestors.treeOwner) &&
+        Objects.equals(this.parents, personWithAncestors.parents);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(personId, firstName, surname, gender, spouseId, maidenName, birthDate, deathDate, bio, avatar);
+    return Objects.hash(personId, firstName, surname, gender, spouseId, maidenName, birthDate, deathDate, bio, avatar, treeOwner, parents);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PersonDto {\n");
+    sb.append("class PersonWithAncestorsDto {\n");
     sb.append("    personId: ").append(toIndentedString(personId)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    surname: ").append(toIndentedString(surname)).append("\n");
@@ -303,6 +363,8 @@ public class PersonDto {
     sb.append("    deathDate: ").append(toIndentedString(deathDate)).append("\n");
     sb.append("    bio: ").append(toIndentedString(bio)).append("\n");
     sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
+    sb.append("    treeOwner: ").append(toIndentedString(treeOwner)).append("\n");
+    sb.append("    parents: ").append(toIndentedString(parents)).append("\n");
     sb.append("}");
     return sb.toString();
   }
