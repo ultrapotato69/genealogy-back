@@ -23,10 +23,10 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("Parents")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-24T13:16:45.722079800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-26T01:27:15.406096200+03:00[Europe/Moscow]")
 public class ParentsDto {
 
-  private UUID personId;
+  private UUID id;
 
   private ParentTypeDto parentType;
 
@@ -41,24 +41,24 @@ public class ParentsDto {
     this.parentType = parentType;
   }
 
-  public ParentsDto personId(UUID personId) {
-    this.personId = personId;
+  public ParentsDto id(UUID id) {
+    this.id = id;
     return this;
   }
 
   /**
    * Идентификатор карточки родителя
-   * @return personId
+   * @return id
   */
   @Valid 
-  @Schema(name = "person_id", example = "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4", description = "Идентификатор карточки родителя", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("person_id")
-  public UUID getPersonId() {
-    return personId;
+  @Schema(name = "id", example = "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4", description = "Идентификатор карточки родителя", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("id")
+  public UUID getId() {
+    return id;
   }
 
-  public void setPersonId(UUID personId) {
-    this.personId = personId;
+  public void setId(UUID id) {
+    this.id = id;
   }
 
   public ParentsDto parentType(ParentTypeDto parentType) {
@@ -90,20 +90,20 @@ public class ParentsDto {
       return false;
     }
     ParentsDto parents = (ParentsDto) o;
-    return Objects.equals(this.personId, parents.personId) &&
+    return Objects.equals(this.id, parents.id) &&
         Objects.equals(this.parentType, parents.parentType);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(personId, parentType);
+    return Objects.hash(id, parentType);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class ParentsDto {\n");
-    sb.append("    personId: ").append(toIndentedString(personId)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    parentType: ").append(toIndentedString(parentType)).append("\n");
     sb.append("}");
     return sb.toString();

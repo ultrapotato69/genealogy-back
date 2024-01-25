@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-24T13:16:45.722079800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-26T01:27:15.406096200+03:00[Europe/Moscow]")
 @Validated
 @Tag(name = "Parents", description = "the Parents API")
 public interface ParentsApi {
@@ -44,16 +44,16 @@ public interface ParentsApi {
     }
 
     /**
-     * DELETE /person/{person_id}/parents/{parent_id}/ : Метод удаления связи с человеком
+     * DELETE /person/{id}/parents/{parent_id}/ : Метод удаления связи с человеком
      * Метод предназначен для удаления связи с предком
      *
-     * @param personId Идентификатор карточки родственника (required)
+     * @param id Идентификатор карточки родственника (required)
      * @param parentId Идентификатор карточки предка (required)
      * @return Успешное удаление (status code 200)
      *         or Любая неожиданная ошибка сервера (status code 5XX)
      */
     @Operation(
-        operationId = "personPersonIdParentsParentIdDelete",
+        operationId = "personIdParentsParentIdDelete",
         summary = "Метод удаления связи с человеком",
         description = "Метод предназначен для удаления связи с предком",
         tags = { "Parents" },
@@ -66,12 +66,12 @@ public interface ParentsApi {
     )
     @RequestMapping(
         method = RequestMethod.DELETE,
-        value = "/person/{person_id}/parents/{parent_id}/",
+        value = "/person/{id}/parents/{parent_id}/",
         produces = { "application/json" }
     )
     
-    default ResponseEntity<Void> personPersonIdParentsParentIdDelete(
-        @Parameter(name = "person_id", description = "Идентификатор карточки родственника", required = true, in = ParameterIn.PATH) @PathVariable("person_id") UUID personId,
+    default ResponseEntity<Void> personIdParentsParentIdDelete(
+        @Parameter(name = "id", description = "Идентификатор карточки родственника", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "parent_id", description = "Идентификатор карточки предка", required = true, in = ParameterIn.PATH) @PathVariable("parent_id") UUID parentId
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
@@ -80,17 +80,17 @@ public interface ParentsApi {
 
 
     /**
-     * POST /person/{person_id}/parents/ : Метод добавления человека в генеалогическое древо
+     * POST /person/{id}/parents/ : Метод добавления человека в генеалогическое древо
      * Метод предназначен для добавления в БД человека
      *
-     * @param personId Идентификатор карточки человека (required)
+     * @param id Идентификатор карточки человека (required)
      * @param parentsDto  (required)
      * @return Подтверждение успешного сохранения (status code 201)
      *         or Некорректные входные данные. Возвращает список атрибутов с ошибками (status code 400)
      *         or Любая неожиданная ошибка сервера (status code 5XX)
      */
     @Operation(
-        operationId = "personPersonIdParentsPost",
+        operationId = "personIdParentsPost",
         summary = "Метод добавления человека в генеалогическое древо",
         description = "Метод предназначен для добавления в БД человека",
         tags = { "Parents" },
@@ -111,24 +111,24 @@ public interface ParentsApi {
     )
     @RequestMapping(
         method = RequestMethod.POST,
-        value = "/person/{person_id}/parents/",
+        value = "/person/{id}/parents/",
         produces = { "application/json;charset=UTF-8", "application/json" },
         consumes = { "application/json;charset=UTF-8" }
     )
     
-    default ResponseEntity<ParentsDto> personPersonIdParentsPost(
-        @Parameter(name = "person_id", description = "Идентификатор карточки человека", required = true, in = ParameterIn.PATH) @PathVariable("person_id") UUID personId,
+    default ResponseEntity<ParentsDto> personIdParentsPost(
+        @Parameter(name = "id", description = "Идентификатор карточки человека", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
         @Parameter(name = "ParentsDto", description = "", required = true) @Valid @RequestBody ParentsDto parentsDto
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"parentType\" : \"mother\", \"person_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\" }";
+                    String exampleString = "{ \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"parentType\" : \"mother\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json;charset=UTF-8"))) {
-                    String exampleString = "{ \"parentType\" : \"mother\", \"person_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\" }";
+                    String exampleString = "{ \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"parentType\" : \"mother\" }";
                     ApiUtil.setExampleResponse(request, "application/json;charset=UTF-8", exampleString);
                     break;
                 }

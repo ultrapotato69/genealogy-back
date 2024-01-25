@@ -25,10 +25,10 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("Person")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-24T13:16:45.722079800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-26T01:27:15.406096200+03:00[Europe/Moscow]")
 public class PersonDto {
 
-  private UUID personId;
+  private UUID id;
 
   private String firstName;
 
@@ -63,24 +63,24 @@ public class PersonDto {
     this.gender = gender;
   }
 
-  public PersonDto personId(UUID personId) {
-    this.personId = personId;
+  public PersonDto id(UUID id) {
+    this.id = id;
     return this;
   }
 
   /**
    * Идентификатор карточки родственника
-   * @return personId
+   * @return id
   */
   @Valid 
-  @Schema(name = "person_id", example = "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4", description = "Идентификатор карточки родственника", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("person_id")
-  public UUID getPersonId() {
-    return personId;
+  @Schema(name = "id", example = "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4", description = "Идентификатор карточки родственника", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("id")
+  public UUID getId() {
+    return id;
   }
 
-  public void setPersonId(UUID personId) {
-    this.personId = personId;
+  public void setId(UUID id) {
+    this.id = id;
   }
 
   public PersonDto firstName(String firstName) {
@@ -272,7 +272,7 @@ public class PersonDto {
       return false;
     }
     PersonDto person = (PersonDto) o;
-    return Objects.equals(this.personId, person.personId) &&
+    return Objects.equals(this.id, person.id) &&
         Objects.equals(this.firstName, person.firstName) &&
         Objects.equals(this.surname, person.surname) &&
         Objects.equals(this.gender, person.gender) &&
@@ -286,14 +286,14 @@ public class PersonDto {
 
   @Override
   public int hashCode() {
-    return Objects.hash(personId, firstName, surname, gender, spouseId, maidenName, birthDate, deathDate, bio, avatar);
+    return Objects.hash(id, firstName, surname, gender, spouseId, maidenName, birthDate, deathDate, bio, avatar);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class PersonDto {\n");
-    sb.append("    personId: ").append(toIndentedString(personId)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    surname: ").append(toIndentedString(surname)).append("\n");
     sb.append("    gender: ").append(toIndentedString(gender)).append("\n");

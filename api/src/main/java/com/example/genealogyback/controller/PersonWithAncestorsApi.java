@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-24T13:16:45.722079800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-26T01:27:15.406096200+03:00[Europe/Moscow]")
 @Validated
 @Tag(name = "PersonWithAncestors", description = "the PersonWithAncestors API")
 public interface PersonWithAncestorsApi {
@@ -43,14 +43,14 @@ public interface PersonWithAncestorsApi {
     }
 
     /**
-     * GET /person/{person_id}/ancestors/ : Метод получения всего генеалогического древа
+     * GET /person/{id}/ancestors/ : Метод получения всего генеалогического древа
      * Метод предназначен для получения из БД полного древа со всеми предками
      *
-     * @param personId Идентификатор карточки с данными родственника (required)
+     * @param id Идентификатор карточки с данными родственника (required)
      * @return Всё дерево предков (status code 200)
      */
     @Operation(
-        operationId = "personPersonIdAncestorsGet",
+        operationId = "personIdAncestorsGet",
         summary = "Метод получения всего генеалогического древа",
         description = "Метод предназначен для получения из БД полного древа со всеми предками",
         tags = { "PersonWithAncestors" },
@@ -62,17 +62,17 @@ public interface PersonWithAncestorsApi {
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/person/{person_id}/ancestors/",
+        value = "/person/{id}/ancestors/",
         produces = { "application/json;charset=UTF-8" }
     )
     
-    default ResponseEntity<PersonWithAncestorsDto> personPersonIdAncestorsGet(
-        @Parameter(name = "person_id", description = "Идентификатор карточки с данными родственника", required = true, in = ParameterIn.PATH) @PathVariable("person_id") UUID personId
+    default ResponseEntity<PersonWithAncestorsDto> personIdAncestorsGet(
+        @Parameter(name = "id", description = "Идентификатор карточки с данными родственника", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json;charset=UTF-8"))) {
-                    String exampleString = "{ \"person_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"firstName\" : \"Елена\", \"surname\" : \"Петрова\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"maidenName\" : \"Смирнова\", \"birthDate\" : \"2024-01-23\", \"deathDate\" : \"2024-01-23\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"treeOwner\" : true, \"parents\" : [ { \"person_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"firstName\" : \"Елена\", \"surname\" : \"Петрова\", \"gender\" : \"female\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"maidenName\" : \"Смирнова\", \"birthDate\" : \"2024-01-23\", \"deathDate\" : \"2024-01-23\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"treeOwner\" : false, \"parents\" : [ ] }, { \"person_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b5\", \"firstName\" : \"Иван\", \"surname\" : \"Петров\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"maidenName\" : \"Смирнова\", \"birthDate\" : \"2024-01-23\", \"deathDate\" : \"2024-01-23\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1537.png\", \"treeOwner\" : false, \"parents\" : [ ] } ] }";
+                    String exampleString = "{ \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"firstName\" : \"Елена\", \"surname\" : \"Петрова\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"maidenName\" : \"Смирнова\", \"birthDate\" : \"2024-01-23\", \"deathDate\" : \"2024-01-23\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"treeOwner\" : true, \"parents\" : [ { \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"firstName\" : \"Елена\", \"surname\" : \"Петрова\", \"gender\" : \"female\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"maidenName\" : \"Смирнова\", \"birthDate\" : \"2024-01-23\", \"deathDate\" : \"2024-01-23\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"treeOwner\" : false, \"parents\" : [ ] }, { \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b5\", \"firstName\" : \"Иван\", \"surname\" : \"Петров\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"maidenName\" : \"Смирнова\", \"birthDate\" : \"2024-01-23\", \"deathDate\" : \"2024-01-23\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1537.png\", \"treeOwner\" : false, \"parents\" : [ ] } ] }";
                     ApiUtil.setExampleResponse(request, "application/json;charset=UTF-8", exampleString);
                     break;
                 }
