@@ -7,21 +7,12 @@ servers:
   - url:  https://localhost:8686/genealogy/swagger-ui/index.html
     description: Dev Server
 paths:
-  /person/{person_id}/:
+  /person/:
     post:
       summary: Метод добавления человека
       description: Метод предназначен для сохранения в БД данных по новому человеку
       tags:
         - Person
-      parameters:
-      - name: person_id
-        required: true
-        in: path
-        description: Идентификатор карточки человека
-        example: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b4
-        schema:
-          type: string
-          format: uuid
       requestBody:
         required: true
         content:
@@ -49,14 +40,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-
+  /person/{id}/:
     get:
      summary: Метод получения карточки человека по идентификатору
      description: Метод предназначен для получения из БД данных по одному человеку.
      tags:
       - Person
      parameters:
-      - name: person_id
+      - name: id
         required: true
         in: path
         description: Идентификатор карточки с данными родственника
@@ -85,7 +76,7 @@ paths:
       tags:
         - Person
       parameters:
-        - name: person_id
+        - name: id
           required: true
           in: path
           description: Идентификатор карточки с данными родственника
@@ -126,7 +117,7 @@ paths:
      tags:
       - Person
      parameters:
-      - name: person_id
+      - name: id
         required: true
         in: path
         description: Идентификатор карточки родственника
@@ -146,14 +137,14 @@ paths:
               $ref: '#/components/schemas/Error'
           
           
-  /person/{person_id}/parents/:
+  /person/{id}/parents/:
     post:
       summary: Метод добавления человека в генеалогическое древо
       description: Метод предназначен для добавления в БД человека
       tags:
         - Parents
       parameters:
-        - name: person_id
+        - name: id
           required: true
           in: path
           description: Идентификатор карточки человека
@@ -190,14 +181,14 @@ paths:
                 $ref: '#/components/schemas/Error'
                 
                 
-  /person/{person_id}/parents/{parent_id}/:
+  /person/{id}/parents/{parent_id}/:
     delete:
       summary: Метод удаления связи с человеком
       description: Метод предназначен для удаления связи с предком
       tags:
         - Parents
       parameters:
-        - name: person_id
+        - name: id
           required: true
           in: path
           description: Идентификатор карточки родственника
@@ -225,14 +216,14 @@ paths:
                 $ref: '#/components/schemas/Error'
     
           
-  /person/{person_id}/ancestors/:
+  /person/{id}/ancestors/:
     get:
       summary: Метод получения всего генеалогического древа
       description: Метод предназначен для получения из БД полного древа со всеми предками
       tags:
         - PersonWithAncestors
       parameters:
-      - name: person_id
+      - name: id
         required: true
         in: path
         description: Идентификатор карточки с данными родственника
@@ -257,7 +248,7 @@ components:
         - surname
         - gender
       properties:
-        person_id:
+        id:
           type: string
           format: uuid
           example: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b4
@@ -310,7 +301,7 @@ components:
               items:
                 $ref: '#/components/schemas/PersonWithAncestors'
       example:
-        person_id: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b4
+        id: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b4
         firstName: Елена
         surname: Петрова
         gender: male
@@ -322,7 +313,7 @@ components:
         avatar: https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png
         treeOwner: true
         parents:
-          - person_id: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b4
+          - id: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b4
             firstName: Елена
             surname: Петрова
             gender: female
@@ -334,7 +325,7 @@ components:
             avatar: https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png
             treeOwner: false
             parents: []
-          - person_id: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b5
+          - id: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b5
             firstName: Иван
             surname: Петров
             gender: male
@@ -354,7 +345,7 @@ components:
         - parentType
         - parent_id
       properties:
-        person_id:
+        id:
           type: string
           format: uuid
           example: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b4
