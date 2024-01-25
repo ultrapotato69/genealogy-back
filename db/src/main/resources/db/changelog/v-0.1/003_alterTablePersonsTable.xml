@@ -1,0 +1,29 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.24.xsd">
+
+    <changeSet id="alterTablePersonsTable" author="karasique69">
+
+        <setTableRemarks tableName="persons" remarks="Информация о людях."/>
+
+        <setColumnRemarks tableName="persons" columnName="id" remarks="Идентификатор человека"/>
+
+        <setColumnRemarks tableName="persons" columnName="first_name" remarks="Имя"/>
+        <modifyDataType tableName="persons" columnName="first_name" newDataType="text"/>
+
+        <modifyDataType tableName="persons" columnName="last_name" newDataType="text"/>
+        <renameColumn tableName="persons" oldColumnName="last_name" newColumnName="surname"
+                      columnDataType="text" remarks="Фамилия"/>
+
+        <setColumnRemarks tableName="persons" columnName="gender" remarks="Пол"/>
+
+        <setColumnRemarks tableName="persons" columnName="birth_date" remarks="Дата рождения"/>
+        <dropDefaultValue tableName="persons" columnName="birth_date"/>
+        <dropNotNullConstraint tableName="persons" columnName="birth_date"
+                               columnDataType="timestamp with time zone"/>
+        <modifyDataType tableName="persons" columnName="birth_date" newDataType="date"/>
+
+    </changeSet>
+
+</databaseChangeLog>
