@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * пол человека
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-24T13:16:45.722079800+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-26T01:27:15.406096200+03:00[Europe/Moscow]")
 public enum GenderDto {
   
   MALE("male"),
