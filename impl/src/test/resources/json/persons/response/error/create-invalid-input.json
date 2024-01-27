@@ -1,0 +1,14 @@
+[
+  {
+    "title": "VALIDATION_ERROR",
+    "detail": "gender : must not be null"
+  },
+  {
+    "title": "VALIDATION_ERROR",
+    "detail": "firstName : must not be null"
+  },
+  {
+    "title": "VALIDATION_ERROR",
+    "detail": "surname : must not be null"
+  }
+]

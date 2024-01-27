@@ -8,9 +8,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.time.OffsetDateTime;
@@ -24,12 +21,12 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * PersonWithAncestorsDto
+ * BasePersonDto
  */
 
-@JsonTypeName("PersonWithAncestors")
+@JsonTypeName("BasePerson")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-27T15:23:13.003773200+03:00[Europe/Moscow]")
-public class PersonWithAncestorsDto {
+public class BasePersonDto {
 
   private String firstName;
 
@@ -51,29 +48,20 @@ public class PersonWithAncestorsDto {
 
   private String avatar;
 
-  private UUID id;
-
-  private Boolean treeOwner;
-
-  @Valid
-  private List<@Valid PersonWithAncestorsDto> parents = new ArrayList<>();
-
-  public PersonWithAncestorsDto() {
+  public BasePersonDto() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public PersonWithAncestorsDto(String firstName, String surname, GenderDto gender, Boolean treeOwner, List<@Valid PersonWithAncestorsDto> parents) {
+  public BasePersonDto(String firstName, String surname, GenderDto gender) {
     this.firstName = firstName;
     this.surname = surname;
     this.gender = gender;
-    this.treeOwner = treeOwner;
-    this.parents = parents;
   }
 
-  public PersonWithAncestorsDto firstName(String firstName) {
+  public BasePersonDto firstName(String firstName) {
     this.firstName = firstName;
     return this;
   }
@@ -93,7 +81,7 @@ public class PersonWithAncestorsDto {
     this.firstName = firstName;
   }
 
-  public PersonWithAncestorsDto surname(String surname) {
+  public BasePersonDto surname(String surname) {
     this.surname = surname;
     return this;
   }
@@ -113,7 +101,7 @@ public class PersonWithAncestorsDto {
     this.surname = surname;
   }
 
-  public PersonWithAncestorsDto gender(GenderDto gender) {
+  public BasePersonDto gender(GenderDto gender) {
     this.gender = gender;
     return this;
   }
@@ -133,7 +121,7 @@ public class PersonWithAncestorsDto {
     this.gender = gender;
   }
 
-  public PersonWithAncestorsDto spouseId(UUID spouseId) {
+  public BasePersonDto spouseId(UUID spouseId) {
     this.spouseId = spouseId;
     return this;
   }
@@ -153,7 +141,7 @@ public class PersonWithAncestorsDto {
     this.spouseId = spouseId;
   }
 
-  public PersonWithAncestorsDto maidenName(String maidenName) {
+  public BasePersonDto maidenName(String maidenName) {
     this.maidenName = maidenName;
     return this;
   }
@@ -173,7 +161,7 @@ public class PersonWithAncestorsDto {
     this.maidenName = maidenName;
   }
 
-  public PersonWithAncestorsDto birthDate(LocalDate birthDate) {
+  public BasePersonDto birthDate(LocalDate birthDate) {
     this.birthDate = birthDate;
     return this;
   }
@@ -193,7 +181,7 @@ public class PersonWithAncestorsDto {
     this.birthDate = birthDate;
   }
 
-  public PersonWithAncestorsDto deathDate(LocalDate deathDate) {
+  public BasePersonDto deathDate(LocalDate deathDate) {
     this.deathDate = deathDate;
     return this;
   }
@@ -213,7 +201,7 @@ public class PersonWithAncestorsDto {
     this.deathDate = deathDate;
   }
 
-  public PersonWithAncestorsDto bio(String bio) {
+  public BasePersonDto bio(String bio) {
     this.bio = bio;
     return this;
   }
@@ -233,7 +221,7 @@ public class PersonWithAncestorsDto {
     this.bio = bio;
   }
 
-  public PersonWithAncestorsDto avatar(String avatar) {
+  public BasePersonDto avatar(String avatar) {
     this.avatar = avatar;
     return this;
   }
@@ -253,74 +241,6 @@ public class PersonWithAncestorsDto {
     this.avatar = avatar;
   }
 
-  public PersonWithAncestorsDto id(UUID id) {
-    this.id = id;
-    return this;
-  }
-
-  /**
-   * Идентификатор карточки родственника
-   * @return id
-  */
-  @Valid 
-  @Schema(name = "id", example = "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4", description = "Идентификатор карточки родственника", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("id")
-  public UUID getId() {
-    return id;
-  }
-
-  public void setId(UUID id) {
-    this.id = id;
-  }
-
-  public PersonWithAncestorsDto treeOwner(Boolean treeOwner) {
-    this.treeOwner = treeOwner;
-    return this;
-  }
-
-  /**
-   * Get treeOwner
-   * @return treeOwner
-  */
-  @NotNull 
-  @Schema(name = "treeOwner", example = "true", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("treeOwner")
-  public Boolean getTreeOwner() {
-    return treeOwner;
-  }
-
-  public void setTreeOwner(Boolean treeOwner) {
-    this.treeOwner = treeOwner;
-  }
-
-  public PersonWithAncestorsDto parents(List<@Valid PersonWithAncestorsDto> parents) {
-    this.parents = parents;
-    return this;
-  }
-
-  public PersonWithAncestorsDto addParentsItem(PersonWithAncestorsDto parentsItem) {
-    if (this.parents == null) {
-      this.parents = new ArrayList<>();
-    }
-    this.parents.add(parentsItem);
-    return this;
-  }
-
-  /**
-   * Get parents
-   * @return parents
-  */
-  @NotNull @Valid 
-  @Schema(name = "parents", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("parents")
-  public List<@Valid PersonWithAncestorsDto> getParents() {
-    return parents;
-  }
-
-  public void setParents(List<@Valid PersonWithAncestorsDto> parents) {
-    this.parents = parents;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -329,30 +249,27 @@ public class PersonWithAncestorsDto {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PersonWithAncestorsDto personWithAncestors = (PersonWithAncestorsDto) o;
-    return Objects.equals(this.firstName, personWithAncestors.firstName) &&
-        Objects.equals(this.surname, personWithAncestors.surname) &&
-        Objects.equals(this.gender, personWithAncestors.gender) &&
-        Objects.equals(this.spouseId, personWithAncestors.spouseId) &&
-        Objects.equals(this.maidenName, personWithAncestors.maidenName) &&
-        Objects.equals(this.birthDate, personWithAncestors.birthDate) &&
-        Objects.equals(this.deathDate, personWithAncestors.deathDate) &&
-        Objects.equals(this.bio, personWithAncestors.bio) &&
-        Objects.equals(this.avatar, personWithAncestors.avatar) &&
-        Objects.equals(this.id, personWithAncestors.id) &&
-        Objects.equals(this.treeOwner, personWithAncestors.treeOwner) &&
-        Objects.equals(this.parents, personWithAncestors.parents);
+    BasePersonDto basePerson = (BasePersonDto) o;
+    return Objects.equals(this.firstName, basePerson.firstName) &&
+        Objects.equals(this.surname, basePerson.surname) &&
+        Objects.equals(this.gender, basePerson.gender) &&
+        Objects.equals(this.spouseId, basePerson.spouseId) &&
+        Objects.equals(this.maidenName, basePerson.maidenName) &&
+        Objects.equals(this.birthDate, basePerson.birthDate) &&
+        Objects.equals(this.deathDate, basePerson.deathDate) &&
+        Objects.equals(this.bio, basePerson.bio) &&
+        Objects.equals(this.avatar, basePerson.avatar);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstName, surname, gender, spouseId, maidenName, birthDate, deathDate, bio, avatar, id, treeOwner, parents);
+    return Objects.hash(firstName, surname, gender, spouseId, maidenName, birthDate, deathDate, bio, avatar);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PersonWithAncestorsDto {\n");
+    sb.append("class BasePersonDto {\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    surname: ").append(toIndentedString(surname)).append("\n");
     sb.append("    gender: ").append(toIndentedString(gender)).append("\n");
@@ -362,9 +279,6 @@ public class PersonWithAncestorsDto {
     sb.append("    deathDate: ").append(toIndentedString(deathDate)).append("\n");
     sb.append("    bio: ").append(toIndentedString(bio)).append("\n");
     sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    treeOwner: ").append(toIndentedString(treeOwner)).append("\n");
-    sb.append("    parents: ").append(toIndentedString(parents)).append("\n");
     sb.append("}");
     return sb.toString();
   }

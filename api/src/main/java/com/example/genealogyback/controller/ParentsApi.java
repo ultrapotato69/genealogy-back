@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-26T01:27:15.406096200+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-27T15:23:13.003773200+03:00[Europe/Moscow]")
 @Validated
 @Tag(name = "Parents", description = "the Parents API")
 public interface ParentsApi {
@@ -50,6 +50,7 @@ public interface ParentsApi {
      * @param id Идентификатор карточки родственника (required)
      * @param parentId Идентификатор карточки предка (required)
      * @return Успешное удаление (status code 200)
+     *         or Отсутсвует сущность с данным id (status code 404)
      *         or Любая неожиданная ошибка сервера (status code 5XX)
      */
     @Operation(
@@ -59,8 +60,11 @@ public interface ParentsApi {
         tags = { "Parents" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Успешное удаление"),
+            @ApiResponse(responseCode = "404", description = "Отсутсвует сущность с данным id", content = {
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class)))
+            }),
             @ApiResponse(responseCode = "5XX", description = "Любая неожиданная ошибка сервера", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class)))
             })
         }
     )
@@ -86,6 +90,7 @@ public interface ParentsApi {
      * @param id Идентификатор карточки человека (required)
      * @param parentsDto  (required)
      * @return Подтверждение успешного сохранения (status code 201)
+     *         or Отсутсвует сущность с данным id (status code 404)
      *         or Некорректные входные данные. Возвращает список атрибутов с ошибками (status code 400)
      *         or Любая неожиданная ошибка сервера (status code 5XX)
      */
@@ -99,13 +104,17 @@ public interface ParentsApi {
                 @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = ParentsDto.class)),
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ParentsDto.class))
             }),
+            @ApiResponse(responseCode = "404", description = "Отсутсвует сущность с данным id", content = {
+                @Content(mediaType = "application/json;charset=UTF-8", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class))),
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class)))
+            }),
             @ApiResponse(responseCode = "400", description = "Некорректные входные данные. Возвращает список атрибутов с ошибками", content = {
-                @Content(mediaType = "application/json;charset=UTF-8", array = @ArraySchema(schema = @Schema(implementation = String.class))),
-                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = String.class)))
+                @Content(mediaType = "application/json;charset=UTF-8", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class))),
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class)))
             }),
             @ApiResponse(responseCode = "5XX", description = "Любая неожиданная ошибка сервера", content = {
-                @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = ErrorDto.class)),
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+                @Content(mediaType = "application/json;charset=UTF-8", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class))),
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class)))
             })
         }
     )

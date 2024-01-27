@@ -5,8 +5,9 @@
  */
 package com.example.genealogyback.controller;
 
+import com.example.genealogyback.dto.BasePersonDto;
 import com.example.genealogyback.dto.ErrorDto;
-import com.example.genealogyback.dto.PersonDto;
+import com.example.genealogyback.dto.ResponsePersonDto;
 import java.util.UUID;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-26T01:27:15.406096200+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-27T15:23:13.003773200+03:00[Europe/Moscow]")
 @Validated
 @Tag(name = "Person", description = "the Person API")
 public interface PersonApi {
@@ -49,6 +50,7 @@ public interface PersonApi {
      *
      * @param id Идентификатор карточки родственника (required)
      * @return Успешное удаление (status code 200)
+     *         or Отсутсвует сущность с данным id (status code 404)
      *         or Любая неожиданная ошибка сервера (status code 5XX)
      */
     @Operation(
@@ -58,8 +60,11 @@ public interface PersonApi {
         tags = { "Person" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Успешное удаление"),
+            @ApiResponse(responseCode = "404", description = "Отсутсвует сущность с данным id", content = {
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class)))
+            }),
             @ApiResponse(responseCode = "5XX", description = "Любая неожиданная ошибка сервера", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class)))
             })
         }
     )
@@ -83,6 +88,7 @@ public interface PersonApi {
      *
      * @param id Идентификатор карточки с данными родственника (required)
      * @return Карточка человека (status code 200)
+     *         or Отсутсвует сущность с данным id (status code 404)
      *         or Любая неожиданная ошибка сервера (status code 5XX)
      */
     @Operation(
@@ -92,12 +98,16 @@ public interface PersonApi {
         tags = { "Person" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Карточка человека", content = {
-                @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = PersonDto.class)),
-                @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDto.class))
+                @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = ResponsePersonDto.class)),
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ResponsePersonDto.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Отсутсвует сущность с данным id", content = {
+                @Content(mediaType = "application/json;charset=UTF-8", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class))),
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class)))
             }),
             @ApiResponse(responseCode = "5XX", description = "Любая неожиданная ошибка сервера", content = {
-                @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = ErrorDto.class)),
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+                @Content(mediaType = "application/json;charset=UTF-8", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class))),
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class)))
             })
         }
     )
@@ -107,18 +117,18 @@ public interface PersonApi {
         produces = { "application/json;charset=UTF-8", "application/json" }
     )
     
-    default ResponseEntity<PersonDto> personIdGet(
+    default ResponseEntity<ResponsePersonDto> personIdGet(
         @Parameter(name = "id", description = "Идентификатор карточки с данными родственника", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"firstName\" : \"Елена\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"surname\" : \"Петрова\", \"deathDate\" : \"2000-01-23\", \"maidenName\" : \"Смирнова\", \"bio\" : \"Биография моего предка очень интересна\", \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"birthDate\" : \"2000-01-23\" }";
+                    String exampleString = "null";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json;charset=UTF-8"))) {
-                    String exampleString = "{ \"firstName\" : \"Елена\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"surname\" : \"Петрова\", \"deathDate\" : \"2000-01-23\", \"maidenName\" : \"Смирнова\", \"bio\" : \"Биография моего предка очень интересна\", \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"birthDate\" : \"2000-01-23\" }";
+                    String exampleString = "null";
                     ApiUtil.setExampleResponse(request, "application/json;charset=UTF-8", exampleString);
                     break;
                 }
@@ -134,9 +144,10 @@ public interface PersonApi {
      * Метод предназначен для обновления в БД данных по имеющейся карточке человека.
      *
      * @param id Идентификатор карточки с данными родственника (required)
-     * @param personDto  (required)
+     * @param basePersonDto  (required)
      * @return Подтверждение успешного обновления (status code 200)
      *         or Некорректные входные данные. Возвращает список атрибутов с ошибками (status code 400)
+     *         or Отсутсвует сущность с данным id (status code 404)
      *         or Любая неожиданная ошибка сервера (status code 5XX)
      */
     @Operation(
@@ -146,16 +157,20 @@ public interface PersonApi {
         tags = { "Person" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Подтверждение успешного обновления", content = {
-                @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = PersonDto.class)),
-                @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDto.class))
+                @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = ResponsePersonDto.class)),
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ResponsePersonDto.class))
             }),
             @ApiResponse(responseCode = "400", description = "Некорректные входные данные. Возвращает список атрибутов с ошибками", content = {
-                @Content(mediaType = "application/json;charset=UTF-8", array = @ArraySchema(schema = @Schema(implementation = String.class))),
-                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = String.class)))
+                @Content(mediaType = "application/json;charset=UTF-8", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class))),
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class)))
+            }),
+            @ApiResponse(responseCode = "404", description = "Отсутсвует сущность с данным id", content = {
+                @Content(mediaType = "application/json;charset=UTF-8", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class))),
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class)))
             }),
             @ApiResponse(responseCode = "5XX", description = "Любая неожиданная ошибка сервера", content = {
-                @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = ErrorDto.class)),
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+                @Content(mediaType = "application/json;charset=UTF-8", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class))),
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class)))
             })
         }
     )
@@ -166,19 +181,19 @@ public interface PersonApi {
         consumes = { "application/json;charset=UTF-8" }
     )
     
-    default ResponseEntity<PersonDto> personIdPut(
+    default ResponseEntity<ResponsePersonDto> personIdPut(
         @Parameter(name = "id", description = "Идентификатор карточки с данными родственника", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id,
-        @Parameter(name = "PersonDto", description = "", required = true) @Valid @RequestBody PersonDto personDto
+        @Parameter(name = "BasePersonDto", description = "", required = true) @Valid @RequestBody BasePersonDto basePersonDto
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"firstName\" : \"Елена\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"surname\" : \"Петрова\", \"deathDate\" : \"2000-01-23\", \"maidenName\" : \"Смирнова\", \"bio\" : \"Биография моего предка очень интересна\", \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"birthDate\" : \"2000-01-23\" }";
+                    String exampleString = "null";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json;charset=UTF-8"))) {
-                    String exampleString = "{ \"firstName\" : \"Елена\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"surname\" : \"Петрова\", \"deathDate\" : \"2000-01-23\", \"maidenName\" : \"Смирнова\", \"bio\" : \"Биография моего предка очень интересна\", \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"birthDate\" : \"2000-01-23\" }";
+                    String exampleString = "null";
                     ApiUtil.setExampleResponse(request, "application/json;charset=UTF-8", exampleString);
                     break;
                 }
@@ -193,7 +208,7 @@ public interface PersonApi {
      * POST /person/ : Метод добавления человека
      * Метод предназначен для сохранения в БД данных по новому человеку
      *
-     * @param personDto  (required)
+     * @param basePersonDto  (required)
      * @return Подтверждение успешного сохранения человека (status code 201)
      *         or Некорректные входные данные. Возвращает список атрибутов с ошибками (status code 400)
      *         or Любая неожиданная ошибка сервера (status code 5XX)
@@ -205,16 +220,16 @@ public interface PersonApi {
         tags = { "Person" },
         responses = {
             @ApiResponse(responseCode = "201", description = "Подтверждение успешного сохранения человека", content = {
-                @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = PersonDto.class)),
-                @Content(mediaType = "application/json", schema = @Schema(implementation = PersonDto.class))
+                @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = ResponsePersonDto.class)),
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ResponsePersonDto.class))
             }),
             @ApiResponse(responseCode = "400", description = "Некорректные входные данные. Возвращает список атрибутов с ошибками", content = {
-                @Content(mediaType = "application/json;charset=UTF-8", array = @ArraySchema(schema = @Schema(implementation = String.class))),
-                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = String.class)))
+                @Content(mediaType = "application/json;charset=UTF-8", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class))),
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class)))
             }),
             @ApiResponse(responseCode = "5XX", description = "Любая неожиданная ошибка сервера", content = {
-                @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = ErrorDto.class)),
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))
+                @Content(mediaType = "application/json;charset=UTF-8", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class))),
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class)))
             })
         }
     )
@@ -225,18 +240,18 @@ public interface PersonApi {
         consumes = { "application/json;charset=UTF-8" }
     )
     
-    default ResponseEntity<PersonDto> personPost(
-        @Parameter(name = "PersonDto", description = "", required = true) @Valid @RequestBody PersonDto personDto
+    default ResponseEntity<ResponsePersonDto> personPost(
+        @Parameter(name = "BasePersonDto", description = "", required = true) @Valid @RequestBody BasePersonDto basePersonDto
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"firstName\" : \"Елена\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"surname\" : \"Петрова\", \"deathDate\" : \"2000-01-23\", \"maidenName\" : \"Смирнова\", \"bio\" : \"Биография моего предка очень интересна\", \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"birthDate\" : \"2000-01-23\" }";
+                    String exampleString = "null";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json;charset=UTF-8"))) {
-                    String exampleString = "{ \"firstName\" : \"Елена\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"surname\" : \"Петрова\", \"deathDate\" : \"2000-01-23\", \"maidenName\" : \"Смирнова\", \"bio\" : \"Биография моего предка очень интересна\", \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"birthDate\" : \"2000-01-23\" }";
+                    String exampleString = "null";
                     ApiUtil.setExampleResponse(request, "application/json;charset=UTF-8", exampleString);
                     break;
                 }

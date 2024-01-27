@@ -5,6 +5,7 @@
  */
 package com.example.genealogyback.controller;
 
+import com.example.genealogyback.dto.ErrorDto;
 import com.example.genealogyback.dto.PersonWithAncestorsDto;
 import java.util.UUID;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
@@ -33,7 +34,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-26T01:27:15.406096200+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-27T15:23:13.003773200+03:00[Europe/Moscow]")
 @Validated
 @Tag(name = "PersonWithAncestors", description = "the PersonWithAncestors API")
 public interface PersonWithAncestorsApi {
@@ -48,6 +49,8 @@ public interface PersonWithAncestorsApi {
      *
      * @param id Идентификатор карточки с данными родственника (required)
      * @return Всё дерево предков (status code 200)
+     *         or Отсутсвует сущность с данным id (status code 404)
+     *         or Любая неожиданная ошибка сервера (status code 5XX)
      */
     @Operation(
         operationId = "personIdAncestorsGet",
@@ -56,14 +59,23 @@ public interface PersonWithAncestorsApi {
         tags = { "PersonWithAncestors" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Всё дерево предков", content = {
-                @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = PersonWithAncestorsDto.class))
+                @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = PersonWithAncestorsDto.class)),
+                @Content(mediaType = "application/json", schema = @Schema(implementation = PersonWithAncestorsDto.class))
+            }),
+            @ApiResponse(responseCode = "404", description = "Отсутсвует сущность с данным id", content = {
+                @Content(mediaType = "application/json;charset=UTF-8", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class))),
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class)))
+            }),
+            @ApiResponse(responseCode = "5XX", description = "Любая неожиданная ошибка сервера", content = {
+                @Content(mediaType = "application/json;charset=UTF-8", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class))),
+                @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class)))
             })
         }
     )
     @RequestMapping(
         method = RequestMethod.GET,
         value = "/person/{id}/ancestors/",
-        produces = { "application/json;charset=UTF-8" }
+        produces = { "application/json;charset=UTF-8", "application/json" }
     )
     
     default ResponseEntity<PersonWithAncestorsDto> personIdAncestorsGet(
@@ -71,8 +83,13 @@ public interface PersonWithAncestorsApi {
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
+                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
+                    String exampleString = "{ \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"firstName\" : \"Елена\", \"surname\" : \"Петрова\", \"gender\" : \"male\", \"spouseId\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"maidenName\" : \"Смирнова\", \"birthDate\" : \"2024-01-23\", \"deathDate\" : \"2024-01-23\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"treeOwner\" : true, \"parents\" : [ { \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"firstName\" : \"Елена\", \"surname\" : \"Петрова\", \"gender\" : \"female\", \"spouseId\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"maidenName\" : \"Смирнова\", \"birthDate\" : \"2024-01-23\", \"deathDate\" : \"2024-01-23\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"treeOwner\" : false, \"parents\" : [ ] }, { \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b5\", \"firstName\" : \"Иван\", \"surname\" : \"Петров\", \"gender\" : \"male\", \"spouseId\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"maidenName\" : \"Смирнова\", \"birthDate\" : \"2024-01-23\", \"deathDate\" : \"2024-01-23\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1537.png\", \"treeOwner\" : false, \"parents\" : [ ] } ] }";
+                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
+                    break;
+                }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json;charset=UTF-8"))) {
-                    String exampleString = "{ \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"firstName\" : \"Елена\", \"surname\" : \"Петрова\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"maidenName\" : \"Смирнова\", \"birthDate\" : \"2024-01-23\", \"deathDate\" : \"2024-01-23\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"treeOwner\" : true, \"parents\" : [ { \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"firstName\" : \"Елена\", \"surname\" : \"Петрова\", \"gender\" : \"female\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"maidenName\" : \"Смирнова\", \"birthDate\" : \"2024-01-23\", \"deathDate\" : \"2024-01-23\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"treeOwner\" : false, \"parents\" : [ ] }, { \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b5\", \"firstName\" : \"Иван\", \"surname\" : \"Петров\", \"gender\" : \"male\", \"spouse_id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"maidenName\" : \"Смирнова\", \"birthDate\" : \"2024-01-23\", \"deathDate\" : \"2024-01-23\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1537.png\", \"treeOwner\" : false, \"parents\" : [ ] } ] }";
+                    String exampleString = "{ \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"firstName\" : \"Елена\", \"surname\" : \"Петрова\", \"gender\" : \"male\", \"spouseId\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"maidenName\" : \"Смирнова\", \"birthDate\" : \"2024-01-23\", \"deathDate\" : \"2024-01-23\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"treeOwner\" : true, \"parents\" : [ { \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"firstName\" : \"Елена\", \"surname\" : \"Петрова\", \"gender\" : \"female\", \"spouseId\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"maidenName\" : \"Смирнова\", \"birthDate\" : \"2024-01-23\", \"deathDate\" : \"2024-01-23\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1536.png\", \"treeOwner\" : false, \"parents\" : [ ] }, { \"id\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b5\", \"firstName\" : \"Иван\", \"surname\" : \"Петров\", \"gender\" : \"male\", \"spouseId\" : \"42abcd2b-8b9c-4af9-88f7-0bc180cf74b4\", \"maidenName\" : \"Смирнова\", \"birthDate\" : \"2024-01-23\", \"deathDate\" : \"2024-01-23\", \"bio\" : \"Биография моего предка очень интересна\", \"avatar\" : \"https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1537.png\", \"treeOwner\" : false, \"parents\" : [ ] } ] }";
                     ApiUtil.setExampleResponse(request, "application/json;charset=UTF-8", exampleString);
                     break;
                 }
