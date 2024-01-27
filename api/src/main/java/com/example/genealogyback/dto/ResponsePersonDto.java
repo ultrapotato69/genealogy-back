@@ -21,14 +21,12 @@ import java.util.*;
 import jakarta.annotation.Generated;
 
 /**
- * PersonDto
+ * ResponsePersonDto
  */
 
-@JsonTypeName("Person")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-26T01:27:15.406096200+03:00[Europe/Moscow]")
-public class PersonDto {
-
-  private UUID id;
+@JsonTypeName("ResponsePerson")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-27T15:23:13.003773200+03:00[Europe/Moscow]")
+public class ResponsePersonDto {
 
   private String firstName;
 
@@ -50,40 +48,22 @@ public class PersonDto {
 
   private String avatar;
 
-  public PersonDto() {
+  private UUID id;
+
+  public ResponsePersonDto() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public PersonDto(String firstName, String surname, GenderDto gender) {
+  public ResponsePersonDto(String firstName, String surname, GenderDto gender) {
     this.firstName = firstName;
     this.surname = surname;
     this.gender = gender;
   }
 
-  public PersonDto id(UUID id) {
-    this.id = id;
-    return this;
-  }
-
-  /**
-   * Идентификатор карточки родственника
-   * @return id
-  */
-  @Valid 
-  @Schema(name = "id", example = "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4", description = "Идентификатор карточки родственника", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("id")
-  public UUID getId() {
-    return id;
-  }
-
-  public void setId(UUID id) {
-    this.id = id;
-  }
-
-  public PersonDto firstName(String firstName) {
+  public ResponsePersonDto firstName(String firstName) {
     this.firstName = firstName;
     return this;
   }
@@ -103,7 +83,7 @@ public class PersonDto {
     this.firstName = firstName;
   }
 
-  public PersonDto surname(String surname) {
+  public ResponsePersonDto surname(String surname) {
     this.surname = surname;
     return this;
   }
@@ -123,7 +103,7 @@ public class PersonDto {
     this.surname = surname;
   }
 
-  public PersonDto gender(GenderDto gender) {
+  public ResponsePersonDto gender(GenderDto gender) {
     this.gender = gender;
     return this;
   }
@@ -143,7 +123,7 @@ public class PersonDto {
     this.gender = gender;
   }
 
-  public PersonDto spouseId(UUID spouseId) {
+  public ResponsePersonDto spouseId(UUID spouseId) {
     this.spouseId = spouseId;
     return this;
   }
@@ -153,8 +133,8 @@ public class PersonDto {
    * @return spouseId
   */
   @Valid 
-  @Schema(name = "spouse_id", example = "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4", description = "Идентификатор супруга/супруги", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("spouse_id")
+  @Schema(name = "spouseId", example = "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4", description = "Идентификатор супруга/супруги", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("spouseId")
   public UUID getSpouseId() {
     return spouseId;
   }
@@ -163,7 +143,7 @@ public class PersonDto {
     this.spouseId = spouseId;
   }
 
-  public PersonDto maidenName(String maidenName) {
+  public ResponsePersonDto maidenName(String maidenName) {
     this.maidenName = maidenName;
     return this;
   }
@@ -183,7 +163,7 @@ public class PersonDto {
     this.maidenName = maidenName;
   }
 
-  public PersonDto birthDate(LocalDate birthDate) {
+  public ResponsePersonDto birthDate(LocalDate birthDate) {
     this.birthDate = birthDate;
     return this;
   }
@@ -203,7 +183,7 @@ public class PersonDto {
     this.birthDate = birthDate;
   }
 
-  public PersonDto deathDate(LocalDate deathDate) {
+  public ResponsePersonDto deathDate(LocalDate deathDate) {
     this.deathDate = deathDate;
     return this;
   }
@@ -223,7 +203,7 @@ public class PersonDto {
     this.deathDate = deathDate;
   }
 
-  public PersonDto bio(String bio) {
+  public ResponsePersonDto bio(String bio) {
     this.bio = bio;
     return this;
   }
@@ -243,7 +223,7 @@ public class PersonDto {
     this.bio = bio;
   }
 
-  public PersonDto avatar(String avatar) {
+  public ResponsePersonDto avatar(String avatar) {
     this.avatar = avatar;
     return this;
   }
@@ -263,6 +243,26 @@ public class PersonDto {
     this.avatar = avatar;
   }
 
+  public ResponsePersonDto id(UUID id) {
+    this.id = id;
+    return this;
+  }
+
+  /**
+   * Идентификатор карточки родственника
+   * @return id
+  */
+  @Valid 
+  @Schema(name = "id", example = "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4", description = "Идентификатор карточки родственника", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("id")
+  public UUID getId() {
+    return id;
+  }
+
+  public void setId(UUID id) {
+    this.id = id;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -271,29 +271,28 @@ public class PersonDto {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PersonDto person = (PersonDto) o;
-    return Objects.equals(this.id, person.id) &&
-        Objects.equals(this.firstName, person.firstName) &&
-        Objects.equals(this.surname, person.surname) &&
-        Objects.equals(this.gender, person.gender) &&
-        Objects.equals(this.spouseId, person.spouseId) &&
-        Objects.equals(this.maidenName, person.maidenName) &&
-        Objects.equals(this.birthDate, person.birthDate) &&
-        Objects.equals(this.deathDate, person.deathDate) &&
-        Objects.equals(this.bio, person.bio) &&
-        Objects.equals(this.avatar, person.avatar);
+    ResponsePersonDto responsePerson = (ResponsePersonDto) o;
+    return Objects.equals(this.firstName, responsePerson.firstName) &&
+        Objects.equals(this.surname, responsePerson.surname) &&
+        Objects.equals(this.gender, responsePerson.gender) &&
+        Objects.equals(this.spouseId, responsePerson.spouseId) &&
+        Objects.equals(this.maidenName, responsePerson.maidenName) &&
+        Objects.equals(this.birthDate, responsePerson.birthDate) &&
+        Objects.equals(this.deathDate, responsePerson.deathDate) &&
+        Objects.equals(this.bio, responsePerson.bio) &&
+        Objects.equals(this.avatar, responsePerson.avatar) &&
+        Objects.equals(this.id, responsePerson.id);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstName, surname, gender, spouseId, maidenName, birthDate, deathDate, bio, avatar);
+    return Objects.hash(firstName, surname, gender, spouseId, maidenName, birthDate, deathDate, bio, avatar, id);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PersonDto {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("class ResponsePersonDto {\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    surname: ").append(toIndentedString(surname)).append("\n");
     sb.append("    gender: ").append(toIndentedString(gender)).append("\n");
@@ -303,6 +302,7 @@ public class PersonDto {
     sb.append("    deathDate: ").append(toIndentedString(deathDate)).append("\n");
     sb.append("    bio: ").append(toIndentedString(bio)).append("\n");
     sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("}");
     return sb.toString();
   }

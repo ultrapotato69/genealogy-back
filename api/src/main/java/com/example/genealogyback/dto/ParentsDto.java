@@ -23,7 +23,7 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("Parents")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-26T01:27:15.406096200+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-27T15:23:13.003773200+03:00[Europe/Moscow]")
 public class ParentsDto {
 
   private UUID id;
