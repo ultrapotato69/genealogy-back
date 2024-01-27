@@ -31,12 +31,6 @@ public class PersonControllerImpl implements PersonApi {
     }
 
     @Override
-    public ResponseEntity<ResponsePersonDto> personIdGet(UUID id) {
-        log.info("Request for reading person with id: {}", id);
-        return ResponseEntity.ok(personService.readById(id));
-    }
-
-    @Override
     public ResponseEntity<ResponsePersonDto> personPost(BasePersonDto personDto) {
         log.info("Request for creating person: {}", personDto);
 
@@ -51,5 +45,23 @@ public class PersonControllerImpl implements PersonApi {
         return ResponseEntity.created(location).body(createdPerson);
     }
 
+    @Override
+    public ResponseEntity<ResponsePersonDto> personIdGet(UUID id) {
+        log.info("Request for reading person with id: {}", id);
+        return ResponseEntity.ok(personService.readById(id));
+    }
+
+    @Override
+    public ResponseEntity<ResponsePersonDto> personIdPut(UUID id, BasePersonDto basePersonDto) {
+        log.info("Request for updating person with id {} : {}", id, basePersonDto);
+        return ResponseEntity.ok(personService.update(id, basePersonDto));
+    }
+
+    @Override
+    public ResponseEntity<Void> personIdDelete(UUID id) {
+        log.info("Request for deleting person with id: {}", id);
+        personService.delete(id);
+        return ResponseEntity.ok().build();
+    }
 
 }
