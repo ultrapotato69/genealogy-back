@@ -87,4 +87,85 @@ public class PersonControllerTest {
         }
 
     }
+
+    @Nested
+    class Update {
+        @Test
+        @Sql(value = "/sql/person/insert-person.sql")
+        void ok() throws Exception {
+            String personUpdate = resourceUtils.getJsonFromResources(BasePersonDto.class,
+                    "json/persons/request/update-ok.json");
+            String personUpdated = resourceUtils.getJsonFromResources(ResponsePersonDto.class,
+                    "json/persons/response/update-ok.json");
+
+            mockMvc.perform(put("/person/{id}/", "12abcd2b-8b9c-4af9-88f7-0bc180cf74b4")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(personUpdate))
+                    .andDo(print())
+                    .andExpect(status().isOk())
+                    .andExpect(content().json(personUpdated));
+        }
+
+        @Test
+        @Sql(value = "/sql/person/insert-person.sql")
+        void invalidInput() throws Exception {
+            String invalidInputResponse = resourceUtils.getJsonFromResources(Object.class,
+                    "json/persons/response/error/create-invalid-input.json");
+
+            mockMvc.perform(put("/person/{id}/", "12abcd2b-8b9c-4af9-88f7-0bc180cf74b4")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content("{}"))
+                    .andDo(print())
+                    .andExpect(status().isBadRequest())
+                    .andExpect(content().json(invalidInputResponse));
+        }
+
+        @Test
+        void noSuchPerson() throws Exception {
+
+            String personUpdate = resourceUtils.getJsonFromResources(BasePersonDto.class,
+                    "json/persons/request/update-ok.json");
+            String readById = resourceUtils.getJsonFromResources(Object.class,
+                    "json/persons/response/error/no-such-person.json");
+
+            mockMvc.perform(put("/person/{id}/", "12abcd2b-8b9c-4af9-88f7-0bc180cf74b4")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(personUpdate))
+                    .andDo(print())
+                    .andExpect(status().isNotFound())
+                    .andExpect(content().json(readById));
+        }
+    }
+
+    @Nested
+    class Delete {
+        @Test
+        @Sql(value = "/sql/person/insert-person.sql")
+        void ok() throws Exception {
+            String readById = resourceUtils.getJsonFromResources(Object.class,
+                    "json/persons/response/error/no-such-person.json");
+
+            mockMvc.perform(delete("/person/{id}/", "12abcd2b-8b9c-4af9-88f7-0bc180cf74b4"))
+                    .andDo(print())
+                    .andExpect(status().isOk());
+
+            mockMvc.perform(delete("/person/{id}/", "12abcd2b-8b9c-4af9-88f7-0bc180cf74b4"))
+                    .andDo(print())
+                    .andExpect(status().isNotFound())
+                    .andExpect(content().json(readById));
+        }
+
+
+        @Test
+        void noSuchPerson() throws Exception {
+            String readById = resourceUtils.getJsonFromResources(Object.class,
+                    "json/persons/response/error/no-such-person.json");
+
+            mockMvc.perform(delete("/person/{id}/", "12abcd2b-8b9c-4af9-88f7-0bc180cf74b4"))
+                    .andDo(print())
+                    .andExpect(status().isNotFound())
+                    .andExpect(content().json(readById));
+        }
+
+    }
 }

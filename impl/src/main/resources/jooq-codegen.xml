@@ -25,7 +25,6 @@
         </database>
         <generate>
             <records>true</records>
-            <daos>true</daos>
         </generate>
         <target>
             <!-- структура пакетов относительно основной директории -->

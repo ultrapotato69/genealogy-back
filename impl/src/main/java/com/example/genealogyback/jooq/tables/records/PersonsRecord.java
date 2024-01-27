@@ -200,25 +200,4 @@ public class PersonsRecord extends UpdatableRecordImpl<PersonsRecord> {
         setAvatar(avatar);
         resetChangedOnNotNull();
     }
-
-    /**
-     * Create a detached, initialised PersonsRecord
-     */
-    public PersonsRecord(com.example.genealogyback.jooq.tables.pojos.Persons value) {
-        super(Persons.PERSONS);
-
-        if (value != null) {
-            setId(value.getId());
-            setFirstName(value.getFirstName());
-            setSurname(value.getSurname());
-            setGender(value.getGender());
-            setBirthDate(value.getBirthDate());
-            setSpouseId(value.getSpouseId());
-            setMaidenName(value.getMaidenName());
-            setDeathDate(value.getDeathDate());
-            setBio(value.getBio());
-            setAvatar(value.getAvatar());
-            resetChangedOnNotNull();
-        }
-    }
 }

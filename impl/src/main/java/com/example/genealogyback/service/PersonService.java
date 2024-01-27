@@ -9,4 +9,8 @@ public interface PersonService {
     ResponsePersonDto create(BasePersonDto personDto);
 
     ResponsePersonDto readById(UUID id);
+
+    ResponsePersonDto update(UUID id, BasePersonDto basePersonDto);
+
+    void delete(UUID id);
 }
