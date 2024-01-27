@@ -1,0 +1,11 @@
+{
+  "firstName": "Иван",
+  "surname": "Ивановов",
+  "gender": "female",
+  "spouseId": "42abcd2b-8b9c-4af9-88f7-0bc180cf74b3",
+  "maidenName": null,
+  "birthDate": "1900-01-25",
+  "deathDate": "1900-01-25",
+  "bio": "Биография моего предка совсем не интересна",
+  "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1535.png"
+}
