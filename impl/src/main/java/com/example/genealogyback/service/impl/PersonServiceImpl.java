@@ -29,4 +29,14 @@ public class PersonServiceImpl implements PersonService {
     public ResponsePersonDto readById(UUID id) {
         return personRepository.readById(id);
     }
+
+    @Override
+    public ResponsePersonDto update(UUID id, BasePersonDto basePersonDto) {
+        return personRepository.update(id, basePersonDto);
+    }
+
+    @Override
+    public void delete(UUID id) {
+        personRepository.deleteById(id);
+    }
 }
