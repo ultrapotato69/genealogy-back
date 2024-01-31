@@ -21,6 +21,11 @@
                     <enumConverter>true</enumConverter>
                     <includeExpression>persons.gender</includeExpression>
                 </forcedType>
+                <forcedType>
+                    <userType>com.example.genealogyback.dto.ParentTypeDto</userType>
+                    <enumConverter>true</enumConverter>
+                    <includeExpression>parents.parent_type</includeExpression>
+                </forcedType>
             </forcedTypes>
         </database>
         <generate>
