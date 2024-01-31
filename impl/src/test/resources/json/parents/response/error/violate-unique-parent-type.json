@@ -1,0 +1,6 @@
+[
+  {
+    "title": "CONSTRAINTS_VIOLATION_ERROR",
+    "detail": "Not a unique entity. Parent of this type (father/mother) already exists for this person."
+  }
+]
