@@ -53,7 +53,6 @@
                     <outputFileEncoding>UTF-8</outputFileEncoding>
                     <propertyFile>${liquibase.propertyFile}</propertyFile>
                     <changeLogFile>${liquibase.changeLogFile}</changeLogFile>
-                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
                 </configuration>
             </plugin>
 
