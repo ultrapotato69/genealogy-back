@@ -56,6 +56,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
+                            <skipIfSpecIsUnchanged>true</skipIfSpecIsUnchanged>
                             <inputSpec>${project.basedir}/src/main/resources/openapi.yaml</inputSpec>
                             <output>./</output>
                             <generatorName>spring</generatorName>
@@ -65,7 +66,6 @@
                             <generateModelTests>false</generateModelTests>
                             <modelNameSuffix>Dto</modelNameSuffix>
                             <generateModels>true</generateModels>
-                            <generateApiTests>false</generateApiTests>
                             <generateSupportingFiles>false</generateSupportingFiles>
                             <modelPackage>com.example.genealogyback.dto</modelPackage>
                             <apiPackage>com.example.genealogyback.controller</apiPackage>

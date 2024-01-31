@@ -9,4 +9,5 @@
     <include file="002_addPersonsTable.xml" relativeToChangelogFile="true"/>
     <include file="003_alterTablePersonsTable.xml" relativeToChangelogFile="true"/>
     <include file="004_addColumnsPersonsTable.xml" relativeToChangelogFile="true"/>
+    <include file="005_addParensTable.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

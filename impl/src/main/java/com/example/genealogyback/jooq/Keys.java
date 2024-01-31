@@ -4,9 +4,12 @@
 package com.example.genealogyback.jooq;
 
 
+import com.example.genealogyback.jooq.tables.Parents;
 import com.example.genealogyback.jooq.tables.Persons;
+import com.example.genealogyback.jooq.tables.records.ParentsRecord;
 import com.example.genealogyback.jooq.tables.records.PersonsRecord;
 
+import org.jooq.ForeignKey;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
@@ -24,5 +27,13 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<ParentsRecord> ONE_PARENT_PER_TYPE_UNIQUE_CONSTRAINT = Internal.createUniqueKey(Parents.PARENTS, DSL.name("one_parent_per_type_unique_constraint"), new TableField[] { Parents.PARENTS.CHILD_ID, Parents.PARENTS.PARENT_TYPE }, true);
     public static final UniqueKey<PersonsRecord> PK_PERSONS_UUID = Internal.createUniqueKey(Persons.PERSONS, DSL.name("pk_persons_uuid"), new TableField[] { Persons.PERSONS.ID }, true);
+
+    // -------------------------------------------------------------------------
+    // FOREIGN KEY definitions
+    // -------------------------------------------------------------------------
+
+    public static final ForeignKey<ParentsRecord, PersonsRecord> PARENTS__PARENTS_CHILD_ID_FK = Internal.createForeignKey(Parents.PARENTS, DSL.name("parents_child_id_fk"), new TableField[] { Parents.PARENTS.CHILD_ID }, Keys.PK_PERSONS_UUID, new TableField[] { Persons.PERSONS.ID }, true);
+    public static final ForeignKey<ParentsRecord, PersonsRecord> PARENTS__PARENTS_PARENT_ID_FK = Internal.createForeignKey(Parents.PARENTS, DSL.name("parents_parent_id_fk"), new TableField[] { Parents.PARENTS.PARENT_ID }, Keys.PK_PERSONS_UUID, new TableField[] { Persons.PERSONS.ID }, true);
 }

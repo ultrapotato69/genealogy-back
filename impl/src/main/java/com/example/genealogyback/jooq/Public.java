@@ -4,6 +4,7 @@
 package com.example.genealogyback.jooq;
 
 
+import com.example.genealogyback.jooq.tables.Parents;
 import com.example.genealogyback.jooq.tables.Persons;
 
 import java.util.Arrays;
@@ -28,6 +29,11 @@ public class Public extends SchemaImpl {
     public static final Public PUBLIC = new Public();
 
     /**
+     * The table <code>public.parents</code>.
+     */
+    public final Parents PARENTS = Parents.PARENTS;
+
+    /**
      * Информация о людях.
      */
     public final Persons PERSONS = Persons.PERSONS;
@@ -48,6 +54,7 @@ public class Public extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
+            Parents.PARENTS,
             Persons.PERSONS
         );
     }

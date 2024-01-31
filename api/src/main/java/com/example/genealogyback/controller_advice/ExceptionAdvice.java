@@ -2,6 +2,9 @@ package com.example.genealogyback.controller_advice;
 
 import com.example.genealogyback.dto.ErrorDto;
 import com.example.genealogyback.exception.NoSuchResourceException;
+import com.example.genealogyback.exception.NonUniqueEntityException;
+import com.example.genealogyback.exception.UndefinedRepoException;
+import com.example.genealogyback.exception.UnprocessableActionException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +37,21 @@ public class ExceptionAdvice {
         return new ResponseEntity<>(List.of(errors), HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler({NonUniqueEntityException.class, UnprocessableActionException.class})
+    public ResponseEntity<?> handleBadRequests(RuntimeException e) {
+        log.info("Exception '{}' is handled. Message: '{}'.",
+                e.getClass().getName(),
+                e.getMessage());
+        e.printStackTrace();
+        ErrorDto errors = new ErrorDto("CONSTRAINTS_VIOLATION_ERROR", e.getMessage());
+        return new ResponseEntity<>(List.of(errors), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @ExceptionHandler({UndefinedRepoException.class})
+    public ResponseEntity<?> handleInternalServiceError(RuntimeException e) {
+        ErrorDto errors = new ErrorDto("INTERNAL_ERROR", e.getMessage());
+        return new ResponseEntity<>(List.of(errors), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
     @ExceptionHandler({RuntimeException.class})
     public ResponseEntity<List<ErrorDto>> handleAllOtherException(RuntimeException e) {

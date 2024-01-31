@@ -4,6 +4,7 @@
 package com.example.genealogyback.jooq;
 
 
+import com.example.genealogyback.jooq.tables.Parents;
 import com.example.genealogyback.jooq.tables.Persons;
 
 
@@ -12,6 +13,11 @@ import com.example.genealogyback.jooq.tables.Persons;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
+
+    /**
+     * The table <code>public.parents</code>.
+     */
+    public static final Parents PARENTS = Parents.PARENTS;
 
     /**
      * Информация о людях.

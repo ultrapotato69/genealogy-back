@@ -7,6 +7,7 @@ package com.example.genealogyback.jooq.tables;
 import com.example.genealogyback.dto.GenderDto;
 import com.example.genealogyback.jooq.Keys;
 import com.example.genealogyback.jooq.Public;
+import com.example.genealogyback.jooq.tables.Parents.ParentsPath;
 import com.example.genealogyback.jooq.tables.records.PersonsRecord;
 
 import java.time.LocalDate;
@@ -15,9 +16,13 @@ import java.util.UUID;
 
 import org.jooq.Condition;
 import org.jooq.Field;
+import org.jooq.ForeignKey;
+import org.jooq.InverseForeignKey;
 import org.jooq.Name;
+import org.jooq.Path;
 import org.jooq.PlainSQL;
 import org.jooq.QueryPart;
+import org.jooq.Record;
 import org.jooq.SQL;
 import org.jooq.Schema;
 import org.jooq.Select;
@@ -132,6 +137,37 @@ public class Persons extends TableImpl<PersonsRecord> {
         this(DSL.name("persons"), null);
     }
 
+    public <O extends Record> Persons(Table<O> path, ForeignKey<O, PersonsRecord> childPath, InverseForeignKey<O, PersonsRecord> parentPath) {
+        super(path, childPath, parentPath, PERSONS);
+    }
+
+    /**
+     * A subtype implementing {@link Path} for simplified path-based joins.
+     */
+    public static class PersonsPath extends Persons implements Path<PersonsRecord> {
+        public <O extends Record> PersonsPath(Table<O> path, ForeignKey<O, PersonsRecord> childPath, InverseForeignKey<O, PersonsRecord> parentPath) {
+            super(path, childPath, parentPath);
+        }
+        private PersonsPath(Name alias, Table<PersonsRecord> aliased) {
+            super(alias, aliased);
+        }
+
+        @Override
+        public PersonsPath as(String alias) {
+            return new PersonsPath(DSL.name(alias), this);
+        }
+
+        @Override
+        public PersonsPath as(Name alias) {
+            return new PersonsPath(alias, this);
+        }
+
+        @Override
+        public PersonsPath as(Table<?> alias) {
+            return new PersonsPath(alias.getQualifiedName(), this);
+        }
+    }
+
     @Override
     public Schema getSchema() {
         return aliased() ? null : Public.PUBLIC;
@@ -140,6 +176,32 @@ public class Persons extends TableImpl<PersonsRecord> {
     @Override
     public UniqueKey<PersonsRecord> getPrimaryKey() {
         return Keys.PK_PERSONS_UUID;
+    }
+
+    private transient ParentsPath _parentsChildIdFk;
+
+    /**
+     * Get the implicit to-many join path to the <code>public.parents</code>
+     * table, via the <code>parents_child_id_fk</code> key
+     */
+    public ParentsPath parentsChildIdFk() {
+        if (_parentsChildIdFk == null)
+            _parentsChildIdFk = new ParentsPath(this, null, Keys.PARENTS__PARENTS_CHILD_ID_FK.getInverseKey());
+
+        return _parentsChildIdFk;
+    }
+
+    private transient ParentsPath _parentsParentIdFk;
+
+    /**
+     * Get the implicit to-many join path to the <code>public.parents</code>
+     * table, via the <code>parents_parent_id_fk</code> key
+     */
+    public ParentsPath parentsParentIdFk() {
+        if (_parentsParentIdFk == null)
+            _parentsParentIdFk = new ParentsPath(this, null, Keys.PARENTS__PARENTS_PARENT_ID_FK.getInverseKey());
+
+        return _parentsParentIdFk;
     }
 
     @Override
