@@ -10,4 +10,16 @@ VALUES ('22abcd2b-8b9c-4af9-88f7-0bc180cf74b4', 'Петр', 'Петров', 'MAL
         'https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1533.png'),
        ('52abcd2b-8b9c-4af9-88f7-0bc180cf74b4', 'Регина', 'Романова', 'FEMALE', null,
         'Сидорова', '2024-01-25', '2024-01-25', 'Биография',
-        'https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1532.png');
+        'https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1532.png'),
+       ('62abcd2b-8b9c-4af9-88f7-0bc180cf74b4', 'Василий', 'Петров', 'MALE', '72abcd2b-8b9c-4af9-88f7-0bc180cf74b4',
+        null, '1900-01-25', '1990-01-25', 'Биография',
+        'https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1539.png'),
+       ('72abcd2b-8b9c-4af9-88f7-0bc180cf74b4', 'Татьяна', 'Петрова', 'FEMALE', '62abcd2b-8b9c-4af9-88f7-0bc180cf74b4',
+        'Лебедева', '1900-01-25', '1990-01-25', 'Биография',
+        'https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1539.png'),
+       ('82abcd2b-8b9c-4af9-88f7-0bc180cf74b4', 'Сидоров', 'Иван', 'MALE', '92abcd2b-8b9c-4af9-88f7-0bc180cf74b4',
+        null, '1900-01-25', '1990-01-25', 'Биография',
+        'https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1539.png'),
+       ('92abcd2b-8b9c-4af9-88f7-0bc180cf74b4', 'Сидорова', 'Анастасия', 'FEMALE', '82abcd2b-8b9c-4af9-88f7-0bc180cf74b4',
+        'Ульянова', '1900-01-25', '1990-01-25', 'Биография',
+        'https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1539.png');

@@ -1,0 +1,101 @@
+{
+  "firstName": "Сережа",
+  "surname": "Петров",
+  "gender": "male",
+  "spouseId": null,
+  "maidenName": null,
+  "birthDate": "2048-01-25",
+  "deathDate": null,
+  "bio": "Биография",
+  "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1533.png",
+  "id": "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+  "treeOwner": true,
+  "parents": [
+    {
+      "firstName": "Регина",
+      "surname": "Романова",
+      "gender": "female",
+      "spouseId": null,
+      "maidenName": "Сидорова",
+      "birthDate": "2024-01-25",
+      "deathDate": "2024-01-25",
+      "bio": "Биография",
+      "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1532.png",
+      "id": "52abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+      "treeOwner": false,
+      "parents": [
+        {
+          "firstName": "Сидоров",
+          "surname": "Иван",
+          "gender": "male",
+          "spouseId": "92abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+          "maidenName": null,
+          "birthDate": "1900-01-25",
+          "deathDate": "1990-01-25",
+          "bio": "Биография",
+          "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1539.png",
+          "id": "82abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+          "treeOwner": false,
+          "parents": null
+        },
+        {
+          "firstName": "Сидорова",
+          "surname": "Анастасия",
+          "gender": "female",
+          "spouseId": "82abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+          "maidenName": "Ульянова",
+          "birthDate": "1900-01-25",
+          "deathDate": "1990-01-25",
+          "bio": "Биография",
+          "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1539.png",
+          "id": "92abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+          "treeOwner": false,
+          "parents": null
+        }
+      ]
+    },
+    {
+      "firstName": "Петр",
+      "surname": "Петров",
+      "gender": "male",
+      "spouseId": "32abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+      "maidenName": null,
+      "birthDate": "2024-01-25",
+      "deathDate": "2024-01-25",
+      "bio": "Биография",
+      "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1531.png",
+      "id": "22abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+      "treeOwner": false,
+      "parents": [
+        {
+          "firstName": "Татьяна",
+          "surname": "Петрова",
+          "gender": "female",
+          "spouseId": "62abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+          "maidenName": "Лебедева",
+          "birthDate": "1900-01-25",
+          "deathDate": "1990-01-25",
+          "bio": "Биография",
+          "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1539.png",
+          "id": "72abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+          "treeOwner": false,
+          "parents": null
+        },
+        {
+          "firstName": "Василий",
+          "surname": "Петров",
+          "gender": "male",
+          "spouseId": "72abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+          "maidenName": null,
+          "birthDate": "1900-01-25",
+          "deathDate": "1990-01-25",
+          "bio": "Биография",
+          "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1539.png",
+          "id": "62abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+          "treeOwner": false,
+          "parents": null
+        }
+      ]
+    }
+  ]
+}
