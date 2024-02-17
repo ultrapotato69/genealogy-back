@@ -1,6 +1,7 @@
 package com.example.genealogyback.controller;
 
 import com.example.genealogyback.dto.BasePersonDto;
+import com.example.genealogyback.dto.PersonWithRelativesDto;
 import com.example.genealogyback.dto.ResponsePersonDto;
 import com.example.genealogyback.service.PersonService;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +47,7 @@ public class PersonControllerImpl implements PersonApi {
     }
 
     @Override
-    public ResponseEntity<ResponsePersonDto> personIdGet(UUID id) {
+    public ResponseEntity<PersonWithRelativesDto> personIdGet(UUID id) {
         log.info("Request for reading person with id: {}", id);
         return ResponseEntity.ok(personService.readById(id));
     }
