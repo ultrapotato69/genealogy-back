@@ -7,6 +7,7 @@ package com.example.genealogyback.controller;
 
 import com.example.genealogyback.dto.BasePersonDto;
 import com.example.genealogyback.dto.ErrorDto;
+import com.example.genealogyback.dto.PersonWithRelativesDto;
 import com.example.genealogyback.dto.ResponsePersonDto;
 import java.util.UUID;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
@@ -35,7 +36,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-27T15:23:13.003773200+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-02-17T21:36:52.606360400+03:00[Europe/Moscow]")
 @Validated
 @Tag(name = "Person", description = "the Person API")
 public interface PersonApi {
@@ -98,8 +99,8 @@ public interface PersonApi {
         tags = { "Person" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Карточка человека", content = {
-                @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = ResponsePersonDto.class)),
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ResponsePersonDto.class))
+                @Content(mediaType = "application/json;charset=UTF-8", schema = @Schema(implementation = PersonWithRelativesDto.class)),
+                @Content(mediaType = "application/json", schema = @Schema(implementation = PersonWithRelativesDto.class))
             }),
             @ApiResponse(responseCode = "404", description = "Отсутсвует сущность с данным id", content = {
                 @Content(mediaType = "application/json;charset=UTF-8", array = @ArraySchema(schema = @Schema(implementation = ErrorDto.class))),
@@ -117,7 +118,7 @@ public interface PersonApi {
         produces = { "application/json;charset=UTF-8", "application/json" }
     )
     
-    default ResponseEntity<ResponsePersonDto> personIdGet(
+    default ResponseEntity<PersonWithRelativesDto> personIdGet(
         @Parameter(name = "id", description = "Идентификатор карточки с данными родственника", required = true, in = ParameterIn.PATH) @PathVariable("id") UUID id
     ) {
         getRequest().ifPresent(request -> {
