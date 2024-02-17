@@ -1,0 +1,39 @@
+{
+  "firstName": "Петр",
+  "surname": "Петров",
+  "gender": "male",
+  "spouseId": "32abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+  "birthDate": "2024-01-25",
+  "deathDate": "2024-01-25",
+  "bio": "Биография",
+  "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1531.png",
+  "id": "22abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+  "parents": [
+    {
+      "id": "62abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+      "firstName": "Василий",
+      "surname": "Петров",
+      "gender": "male"
+    },
+    {
+      "id": "72abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+      "firstName": "Татьяна",
+      "surname": "Петрова",
+      "gender": "female"
+    }
+  ],
+  "children": [
+    {
+      "id": "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+      "firstName": "Сережа",
+      "surname": "Петров",
+      "gender": "male"
+    }
+  ],
+  "spouse": {
+    "id": "32abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+    "firstName": "Галина",
+    "surname": "Петрова",
+    "gender": "female"
+  }
+}
