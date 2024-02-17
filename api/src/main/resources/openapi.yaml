@@ -63,7 +63,7 @@ paths:
         content:
           application/json;charset=UTF-8:
             schema:
-              $ref: '#/components/schemas/ResponsePerson'
+              $ref: '#/components/schemas/PersonWithRelatives'
       '404':
         description: Отсутсвует сущность с данным id
         content:
@@ -412,6 +412,22 @@ components:
             treeOwner: false
             parents: []
 
+    PersonWithRelatives:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ResponsePerson'
+        - type: object
+          properties:
+            parents:
+              type: array
+              items:
+                $ref: '#/components/schemas/Relative'
+            children:
+              type: array
+              items:
+                $ref: '#/components/schemas/Relative'
+            spouse:
+              $ref: '#/components/schemas/Relative'
     
     Parents:
       type: object
@@ -427,7 +443,28 @@ components:
         parentType:
           $ref: '#/components/schemas/ParentType'
           example: mother
-          
+
+    Relative:
+      type: object
+      required:
+        - id
+        - gender
+        - firstname
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b4
+        firstName:
+          type: string
+          example: Елена
+        surname:
+          type: string
+          example: Петрова
+        gender:
+          $ref: '#/components/schemas/Gender'
+
+
     Gender:
       description: пол человека
       type: string
