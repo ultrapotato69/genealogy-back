@@ -1,6 +1,7 @@
 package com.example.genealogyback.service.impl;
 
 import com.example.genealogyback.dto.BasePersonDto;
+import com.example.genealogyback.dto.PersonWithRelativesDto;
 import com.example.genealogyback.dto.ResponsePersonDto;
 import com.example.genealogyback.repository.PersonRepository;
 import com.example.genealogyback.service.PersonService;
@@ -14,7 +15,6 @@ public class PersonServiceImpl implements PersonService {
     private final PersonRepository personRepository;
 
 
-
     public PersonServiceImpl(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
@@ -26,8 +26,17 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public ResponsePersonDto readById(UUID id) {
-        return personRepository.readById(id);
+    public PersonWithRelativesDto readById(UUID id) {
+        PersonWithRelativesDto responsePersonDto = personRepository.readById(id);
+
+        if (responsePersonDto.getSpouseId() != null) {
+            responsePersonDto.setSpouse(personRepository.findSpouseById(id));
+        }
+
+        responsePersonDto.setChildren(personRepository.findChildrenById(id));
+        responsePersonDto.setParents(personRepository.findParentsById(id));
+
+        return responsePersonDto;
     }
 
     @Override

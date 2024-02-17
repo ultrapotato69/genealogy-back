@@ -76,6 +76,18 @@ public class PersonControllerTest {
         }
 
         @Test
+        @Sql(value = {"/sql/person/insert-persons.sql", "/sql/parents/add-parents.sql"})
+        void readByIdWithRelatives() throws Exception {
+            String readById = resourceUtils.getJsonFromResources(ResponsePersonDto.class,
+                    "json/persons/response/read-by-id-with-relatives.json");
+
+            mockMvc.perform(get("/person/{id}/", "22abcd2b-8b9c-4af9-88f7-0bc180cf74b4"))
+                    .andDo(print())
+                    .andExpect(status().isOk())
+                    .andExpect(content().json(readById));
+        }
+
+        @Test
         void noSuchPerson() throws Exception {
             String readById = resourceUtils.getJsonFromResources(Object.class,
                     "json/persons/response/error/no-such-person.json");
