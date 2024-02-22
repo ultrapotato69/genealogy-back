@@ -313,7 +313,6 @@ components:
       type: object
       required:
         - firstName
-        - surname
         - gender
       properties:
         firstName:
