@@ -71,7 +71,7 @@ public class Persons extends TableImpl<PersonsRecord> {
     /**
      * The column <code>public.persons.surname</code>.
      */
-    public final TableField<PersonsRecord, String> SURNAME = createField(DSL.name("surname"), SQLDataType.CLOB.nullable(false), this, "");
+    public final TableField<PersonsRecord, String> SURNAME = createField(DSL.name("surname"), SQLDataType.CLOB, this, "");
 
     /**
      * The column <code>public.persons.gender</code>. Пол
