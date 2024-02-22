@@ -25,7 +25,7 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("BasePerson")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-01-27T15:23:13.003773200+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-02-22T22:46:03.398754600+03:00[Europe/Moscow]")
 public class BasePersonDto {
 
   private String firstName;
@@ -55,9 +55,8 @@ public class BasePersonDto {
   /**
    * Constructor with only required parameters
    */
-  public BasePersonDto(String firstName, String surname, GenderDto gender) {
+  public BasePersonDto(String firstName, GenderDto gender) {
     this.firstName = firstName;
-    this.surname = surname;
     this.gender = gender;
   }
 
@@ -90,8 +89,8 @@ public class BasePersonDto {
    * Get surname
    * @return surname
   */
-  @NotNull 
-  @Schema(name = "surname", example = "Петрова", requiredMode = Schema.RequiredMode.REQUIRED)
+  
+  @Schema(name = "surname", example = "Петрова", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("surname")
   public String getSurname() {
     return surname;
