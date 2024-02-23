@@ -11,7 +11,8 @@
     "bio": "Биография",
     "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1539.png",
     "childId": "22abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
-    "parentType": "mother"
+    "parentType": "mother",
+    "isAlive": true
   },
   {
     "id": "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
@@ -25,7 +26,8 @@
     "bio": "Биография",
     "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1533.png",
     "childId": null,
-    "parentType": null
+    "parentType": null,
+    "isAlive": null
   },
   {
     "id": "52abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
@@ -39,7 +41,8 @@
     "bio": "Биография",
     "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1532.png",
     "childId": "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
-    "parentType": "mother"
+    "parentType": "mother",
+    "isAlive": true
   },
   {
     "id": "62abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
@@ -53,7 +56,8 @@
     "bio": "Биография",
     "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1539.png",
     "childId": "22abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
-    "parentType": "father"
+    "parentType": "father",
+    "isAlive": true
   },
   {
     "id": "82abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
@@ -67,7 +71,8 @@
     "bio": "Биография",
     "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1539.png",
     "childId": "52abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
-    "parentType": "father"
+    "parentType": "father",
+    "isAlive": true
   },
   {
     "id": "92abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
@@ -81,7 +86,8 @@
     "bio": "Биография",
     "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1539.png",
     "childId": "52abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
-    "parentType": "mother"
+    "parentType": "mother",
+    "isAlive": true
   },
   {
     "id": "22abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
@@ -95,6 +101,7 @@
     "bio": "Биография",
     "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1531.png",
     "childId": "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
-    "parentType": "father"
+    "parentType": "father",
+    "isAlive": true
   }
 ]
