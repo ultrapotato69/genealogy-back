@@ -108,6 +108,11 @@ public class Persons extends TableImpl<PersonsRecord> {
      */
     public final TableField<PersonsRecord, String> AVATAR = createField(DSL.name("avatar"), SQLDataType.CLOB, this, "Ссылка на фотографию");
 
+    /**
+     * The column <code>public.persons.is_alive</code>. Флаг жив ли человек
+     */
+    public final TableField<PersonsRecord, Boolean> IS_ALIVE = createField(DSL.name("is_alive"), SQLDataType.BOOLEAN, this, "Флаг жив ли человек");
+
     private Persons(Name alias, Table<PersonsRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
     }
