@@ -162,6 +162,20 @@ public class PersonsRecord extends UpdatableRecordImpl<PersonsRecord> {
         return (String) get(9);
     }
 
+    /**
+     * Setter for <code>public.persons.is_alive</code>. Флаг жив ли человек
+     */
+    public void setIsAlive(Boolean value) {
+        set(10, value);
+    }
+
+    /**
+     * Getter for <code>public.persons.is_alive</code>. Флаг жив ли человек
+     */
+    public Boolean getIsAlive() {
+        return (Boolean) get(10);
+    }
+
     // -------------------------------------------------------------------------
     // Primary key information
     // -------------------------------------------------------------------------
@@ -185,7 +199,7 @@ public class PersonsRecord extends UpdatableRecordImpl<PersonsRecord> {
     /**
      * Create a detached, initialised PersonsRecord
      */
-    public PersonsRecord(UUID id, String firstName, String surname, GenderDto gender, LocalDate birthDate, UUID spouseId, String maidenName, LocalDate deathDate, String bio, String avatar) {
+    public PersonsRecord(UUID id, String firstName, String surname, GenderDto gender, LocalDate birthDate, UUID spouseId, String maidenName, LocalDate deathDate, String bio, String avatar, Boolean isAlive) {
         super(Persons.PERSONS);
 
         setId(id);
@@ -198,6 +212,7 @@ public class PersonsRecord extends UpdatableRecordImpl<PersonsRecord> {
         setDeathDate(deathDate);
         setBio(bio);
         setAvatar(avatar);
+        setIsAlive(isAlive);
         resetChangedOnNotNull();
     }
 }

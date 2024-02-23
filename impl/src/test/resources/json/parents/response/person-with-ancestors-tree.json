@@ -8,6 +8,7 @@
   "deathDate": null,
   "bio": "Биография",
   "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1533.png",
+  "isAlive": null,
   "id": "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
   "treeOwner": true,
   "parents": [
@@ -21,6 +22,7 @@
       "deathDate": "2024-01-25",
       "bio": "Биография",
       "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1532.png",
+      "isAlive": true,
       "id": "52abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
       "treeOwner": false,
       "parents": [
@@ -34,6 +36,7 @@
           "deathDate": "1990-01-25",
           "bio": "Биография",
           "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1539.png",
+          "isAlive": true,
           "id": "82abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
           "treeOwner": false,
           "parents": null
@@ -48,6 +51,7 @@
           "deathDate": "1990-01-25",
           "bio": "Биография",
           "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1539.png",
+          "isAlive": true,
           "id": "92abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
           "treeOwner": false,
           "parents": null
@@ -64,6 +68,7 @@
       "deathDate": "2024-01-25",
       "bio": "Биография",
       "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1531.png",
+      "isAlive": true,
       "id": "22abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
       "treeOwner": false,
       "parents": [
@@ -77,6 +82,7 @@
           "deathDate": "1990-01-25",
           "bio": "Биография",
           "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1539.png",
+          "isAlive": true,
           "id": "72abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
           "treeOwner": false,
           "parents": null
@@ -91,6 +97,7 @@
           "deathDate": "1990-01-25",
           "bio": "Биография",
           "avatar": "https://sartur.sgu.ru/wp-content/uploads/2021/09/avatar1-1536x1539.png",
+          "isAlive": true,
           "id": "62abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
           "treeOwner": false,
           "parents": null

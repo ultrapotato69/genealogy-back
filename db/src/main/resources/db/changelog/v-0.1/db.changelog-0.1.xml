@@ -11,4 +11,5 @@
     <include file="004_addColumnsPersonsTable.xml" relativeToChangelogFile="true"/>
     <include file="005_addParensTable.xml" relativeToChangelogFile="true"/>
     <include file="006_dropSurnameNotNullConstraint.xml" relativeToChangelogFile="true"/>
+    <include file="007_addColumnIsAlivePersonsTable.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

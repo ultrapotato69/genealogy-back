@@ -47,6 +47,7 @@ public class PersonWithAncestorsServiceImpl implements PersonWithAncestorsServic
                             personWithAncestors.setDeathDate(person.getDeathDate());
                             personWithAncestors.setBio(person.getBio());
                             personWithAncestors.setAvatar(person.getAvatar());
+                            personWithAncestors.setIsAlive(person.getIsAlive());
                             personWithAncestors.setTreeOwner(person.getChildId() == null);
 
                             list.add(personWithAncestors);

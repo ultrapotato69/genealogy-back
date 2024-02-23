@@ -25,7 +25,7 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("BasePerson")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-02-22T22:46:03.398754600+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-02-24T00:42:40.622342500+03:00[Europe/Moscow]")
 public class BasePersonDto {
 
   private String firstName;
@@ -47,6 +47,8 @@ public class BasePersonDto {
   private String bio;
 
   private String avatar;
+
+  private Boolean isAlive;
 
   public BasePersonDto() {
     super();
@@ -240,6 +242,26 @@ public class BasePersonDto {
     this.avatar = avatar;
   }
 
+  public BasePersonDto isAlive(Boolean isAlive) {
+    this.isAlive = isAlive;
+    return this;
+  }
+
+  /**
+   * Get isAlive
+   * @return isAlive
+  */
+  
+  @Schema(name = "isAlive", example = "true", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("isAlive")
+  public Boolean getIsAlive() {
+    return isAlive;
+  }
+
+  public void setIsAlive(Boolean isAlive) {
+    this.isAlive = isAlive;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -257,12 +279,13 @@ public class BasePersonDto {
         Objects.equals(this.birthDate, basePerson.birthDate) &&
         Objects.equals(this.deathDate, basePerson.deathDate) &&
         Objects.equals(this.bio, basePerson.bio) &&
-        Objects.equals(this.avatar, basePerson.avatar);
+        Objects.equals(this.avatar, basePerson.avatar) &&
+        Objects.equals(this.isAlive, basePerson.isAlive);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstName, surname, gender, spouseId, maidenName, birthDate, deathDate, bio, avatar);
+    return Objects.hash(firstName, surname, gender, spouseId, maidenName, birthDate, deathDate, bio, avatar, isAlive);
   }
 
   @Override
@@ -278,6 +301,7 @@ public class BasePersonDto {
     sb.append("    deathDate: ").append(toIndentedString(deathDate)).append("\n");
     sb.append("    bio: ").append(toIndentedString(bio)).append("\n");
     sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
+    sb.append("    isAlive: ").append(toIndentedString(isAlive)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -29,7 +29,7 @@ import jakarta.annotation.Generated;
  */
 
 @JsonTypeName("PersonWithRelatives")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-02-22T22:46:03.398754600+03:00[Europe/Moscow]")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-02-24T00:42:40.622342500+03:00[Europe/Moscow]")
 public class PersonWithRelativesDto {
 
   private String firstName;
@@ -51,6 +51,8 @@ public class PersonWithRelativesDto {
   private String bio;
 
   private String avatar;
+
+  private Boolean isAlive;
 
   private UUID id;
 
@@ -254,6 +256,26 @@ public class PersonWithRelativesDto {
     this.avatar = avatar;
   }
 
+  public PersonWithRelativesDto isAlive(Boolean isAlive) {
+    this.isAlive = isAlive;
+    return this;
+  }
+
+  /**
+   * Get isAlive
+   * @return isAlive
+  */
+  
+  @Schema(name = "isAlive", example = "true", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("isAlive")
+  public Boolean getIsAlive() {
+    return isAlive;
+  }
+
+  public void setIsAlive(Boolean isAlive) {
+    this.isAlive = isAlive;
+  }
+
   public PersonWithRelativesDto id(UUID id) {
     this.id = id;
     return this;
@@ -368,6 +390,7 @@ public class PersonWithRelativesDto {
         Objects.equals(this.deathDate, personWithRelatives.deathDate) &&
         Objects.equals(this.bio, personWithRelatives.bio) &&
         Objects.equals(this.avatar, personWithRelatives.avatar) &&
+        Objects.equals(this.isAlive, personWithRelatives.isAlive) &&
         Objects.equals(this.id, personWithRelatives.id) &&
         Objects.equals(this.parents, personWithRelatives.parents) &&
         Objects.equals(this.children, personWithRelatives.children) &&
@@ -376,7 +399,7 @@ public class PersonWithRelativesDto {
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstName, surname, gender, spouseId, maidenName, birthDate, deathDate, bio, avatar, id, parents, children, spouse);
+    return Objects.hash(firstName, surname, gender, spouseId, maidenName, birthDate, deathDate, bio, avatar, isAlive, id, parents, children, spouse);
   }
 
   @Override
@@ -392,6 +415,7 @@ public class PersonWithRelativesDto {
     sb.append("    deathDate: ").append(toIndentedString(deathDate)).append("\n");
     sb.append("    bio: ").append(toIndentedString(bio)).append("\n");
     sb.append("    avatar: ").append(toIndentedString(avatar)).append("\n");
+    sb.append("    isAlive: ").append(toIndentedString(isAlive)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    parents: ").append(toIndentedString(parents)).append("\n");
     sb.append("    children: ").append(toIndentedString(children)).append("\n");

@@ -33,6 +33,8 @@ public class PersonWithAncestorsProjection {
 
     private String avatar;
 
+    private Boolean isAlive;
+
     private UUID childId;
 
     private ParentTypeDto parentType;
