@@ -2,7 +2,7 @@
   "firstName": "Иван",
   "surname": "Ивановов",
   "gender": "female",
-  "spouseId": "42abcd2b-8b9c-4af9-88f7-0bc180cf74b3",
+  "spouseId": null,
   "maidenName": null,
   "birthDate": "1900-01-25",
   "deathDate": "1900-01-25",

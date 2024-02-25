@@ -8,10 +8,13 @@ import com.example.genealogyback.dto.GenderDto;
 import com.example.genealogyback.jooq.Keys;
 import com.example.genealogyback.jooq.Public;
 import com.example.genealogyback.jooq.tables.Parents.ParentsPath;
+import com.example.genealogyback.jooq.tables.Persons.PersonsPath;
 import com.example.genealogyback.jooq.tables.records.PersonsRecord;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 import org.jooq.Condition;
@@ -181,6 +184,23 @@ public class Persons extends TableImpl<PersonsRecord> {
     @Override
     public UniqueKey<PersonsRecord> getPrimaryKey() {
         return Keys.PK_PERSONS_UUID;
+    }
+
+    @Override
+    public List<ForeignKey<PersonsRecord, ?>> getReferences() {
+        return Arrays.asList(Keys.PERSONS__FK_SPOUSE_ID_PERSON_ID);
+    }
+
+    private transient PersonsPath _persons;
+
+    /**
+     * Get the implicit join path to the <code>public.persons</code> table.
+     */
+    public PersonsPath persons() {
+        if (_persons == null)
+            _persons = new PersonsPath(this, Keys.PERSONS__FK_SPOUSE_ID_PERSON_ID, null);
+
+        return _persons;
     }
 
     private transient ParentsPath _parentsChildIdFk;

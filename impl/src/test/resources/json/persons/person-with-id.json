@@ -3,7 +3,7 @@
   "firstName": "Елена",
   "surname": "Петрова",
   "gender": "male",
-  "spouseId": "42abcd2b-8b9c-4af9-88f7-0bc180cf74b4",
+  "spouseId": null,
   "maidenName": "Смирнова",
   "birthDate": "2024-01-25",
   "deathDate": "2024-01-25",

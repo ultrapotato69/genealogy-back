@@ -36,4 +36,5 @@ public class Keys {
 
     public static final ForeignKey<ParentsRecord, PersonsRecord> PARENTS__PARENTS_CHILD_ID_FK = Internal.createForeignKey(Parents.PARENTS, DSL.name("parents_child_id_fk"), new TableField[] { Parents.PARENTS.CHILD_ID }, Keys.PK_PERSONS_UUID, new TableField[] { Persons.PERSONS.ID }, true);
     public static final ForeignKey<ParentsRecord, PersonsRecord> PARENTS__PARENTS_PARENT_ID_FK = Internal.createForeignKey(Parents.PARENTS, DSL.name("parents_parent_id_fk"), new TableField[] { Parents.PARENTS.PARENT_ID }, Keys.PK_PERSONS_UUID, new TableField[] { Persons.PERSONS.ID }, true);
+    public static final ForeignKey<PersonsRecord, PersonsRecord> PERSONS__FK_SPOUSE_ID_PERSON_ID = Internal.createForeignKey(Persons.PERSONS, DSL.name("fk_spouse_id_person_id"), new TableField[] { Persons.PERSONS.SPOUSE_ID }, Keys.PK_PERSONS_UUID, new TableField[] { Persons.PERSONS.ID }, true);
 }
