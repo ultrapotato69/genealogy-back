@@ -377,6 +377,12 @@ components:
         physicalCharacteristics:
           type: string
           example: Высокого роста, глаза серые
+        religiousName:
+          type: string
+          example: Варфоломей
+        nickname:
+          type: string
+          example: Варфоломей
         addresses:
           type: array
           items:
