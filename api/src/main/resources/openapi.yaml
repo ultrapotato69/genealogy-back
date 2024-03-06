@@ -349,6 +349,44 @@ components:
         isAlive:
           type: boolean
           example: true
+        birthPlace:
+          type: string
+          example: город Тамбов
+        deathPlace:
+          type: string
+          example: город Тамбов
+        deathCause:
+          type: string
+          example: Туберкулёз
+        cemetery:
+          type: string
+          example: Петропавловское кладбище в Тамбове
+        baptismPlace:
+          type: string
+          example: Покровский храм в Тамбове
+        baptismDate:
+          type: string
+          formal: date
+          example: 01.01.1916
+        godParents:
+          type: string
+          example: Крестьянин села Большая Талинка Иван Петрович Жирнов и крестьянская жёнка Ираида Гавриловна Житенева
+        religion:
+          type: string
+          example: Православного вероисповедания
+        physicalCharacteristics:
+          type: string
+          example: Высокого роста, глаза серые
+        religiousName:
+          type: string
+          example: Варфоломей
+        nickname:
+          type: string
+          example: Варфоломей
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
 
     ResponsePerson:
       allOf:
@@ -474,8 +512,21 @@ components:
         - male
         - female
       example: male
-      
-        
+
+    Address:
+      description: адрес человека
+      type: object
+      properties:
+        country:
+          type: string
+          example: Российская империя
+        region:
+          type: string
+          example: Тамбовская губерния
+        locality:
+          type: string
+          example: Моршанский уезд, Сосновская волость, деревня Константиновка
+
     ParentType:
       description: тип родителя
       type: string
